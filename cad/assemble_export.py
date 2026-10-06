@@ -32,9 +32,8 @@ def rebuild_assembly():
     if old: api("DELETE", f"/elements/d/{DID}/w/{WID}/e/{old}")
     asm = api("POST", f"/assemblies/d/{DID}/w/{WID}", {"name": "Scoop on car (scan, shared origin)"})["id"]
     state["asm"] = asm; json.dump(state, open("onshape_state.json", "w"), indent=1)
-    for eid, types in ((PS, ["PARTS"]), (state["mesh"]["hood_outer"], ["PARTS"]), (state["mesh"]["hood_outer"], ["SURFACES"]),
-                       (state["mesh"]["hood_underside"], ["PARTS"]), (state["mesh"]["hood_underside"], ["SURFACES"]),
-                       (state["mesh"]["engine_bay"], ["PARTS"]), (state["mesh"]["engine_bay"], ["SURFACES"])):
+    for eid, types in ((PS, ["PARTS"]), (state["mesh"]["hood_outer"], ["PARTS", "SURFACES"]),
+                       (state["mesh"]["hood_underside"], ["PARTS", "SURFACES"]), (state["mesh"]["engine_bay"], ["PARTS", "SURFACES"])):
         try: api("POST", f"/assemblies/d/{DID}/w/{WID}/e/{asm}/instances", {"documentId": DID, "elementId": eid, "isWholePartStudio": True, "includePartTypes": types})
         except SystemExit as ex: print("  instance skipped:", str(ex)[:160])
     inst = api("GET", f"/assemblies/d/{DID}/w/{WID}/e/{asm}?includeNonSolids=true")["rootAssembly"]["instances"]
@@ -61,7 +60,7 @@ def ensure_flat_studio():
 def export_parts(ps):
     parts = api("GET", f"/parts/d/{DID}/w/{WID}/e/{ps}")
     printable = [p for p in parts if p["name"][:1] in ("A", "B", "C", "R", "S", "T") and not p["name"].startswith("ERR")]
-    for p in printable:
+    for p in (printable if "--no-stl" not in sys.argv else []):
         safe = "".join(c if c.isalnum() else "_" for c in p["name"])[:60]
         data = api("GET", f"/partstudios/d/{DID}/w/{WID}/e/{ps}/stl", raw=True, params={"units": "millimeter", "mode": "binary", "angleTolerance": 0.08, "chordTolerance": 0.04, "partIds": p["partId"]})
         open(f"{OUT}/{safe}.stl", "wb").write(data); print(f"  STL {safe}.stl  {len(data)//1024} kB")
@@ -71,7 +70,7 @@ def export_parts(ps):
     while st == "ACTIVE" and time.time() - t0 < 600: time.sleep(6); js = api("GET", f"/translations/{tid}"); st = js.get("requestState")
     if st == "DONE" and js.get("resultExternalDataIds"):
         data = api("GET", f"/documents/d/{DID}/externaldata/{js['resultExternalDataIds'][0]}", raw=True)
-        open(f"{OUT}/probe_hood_scoop_system_flat.step", "wb").write(data); print(f"  STEP probe_hood_scoop_system_flat.step {len(data)//1024} kB")
+        open(f"{OUT}/probe_hood_scoop_system.step", "wb").write(data); print(f"  STEP probe_hood_scoop_system.step {len(data)//1024} kB")
     else: print("  STEP export:", st, js.get("failureReason"))
     return printable
 

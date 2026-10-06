@@ -37,7 +37,7 @@ Hardware: 8 x M6x50, nylocs, washers, Ø10 tube for limiters and spacers, 2 mm f
 
 ## CAD
 
-Design master: [Onshape document](https://cad.onshape.com/documents/b03b5bf08a93c5df66f722d9/w/0932d1534808bff872171f8f/e/6da6d90250a1b357294ec80b) (custom feature "Probe hood scoop system" in the "Probe scoop FeatureScript" tab; every dimension is a parameter). The scan meshes are in the same document, so the scoop can be viewed on the car.
+Design master: [Onshape document](https://cad.onshape.com/documents/b03b5bf08a93c5df66f722d9/w/0932d1534808bff872171f8f/e/94d73fdd94bb229f0805fb39) (custom feature "Probe hood scoop system" in the "Probe scoop FeatureScript" tab; every dimension is a parameter). The scan meshes are in the same document, so the scoop can be viewed on the car.
 
 To rebuild the STLs without Onshape:
 
