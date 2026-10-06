@@ -32,10 +32,11 @@ def rebuild_assembly():
     if old: api("DELETE", f"/elements/d/{DID}/w/{WID}/e/{old}")
     asm = api("POST", f"/assemblies/d/{DID}/w/{WID}", {"name": "Scoop on car (scan, shared origin)"})["id"]
     state["asm"] = asm; json.dump(state, open("onshape_state.json", "w"), indent=1)
-    for eid, types in ((PS, ["PARTS"]), (state["mesh"]["hood_outer"], ["PARTS", "SURFACES"]),
-                       (state["mesh"]["hood_underside"], ["PARTS", "SURFACES"]), (state["mesh"]["engine_bay"], ["PARTS", "SURFACES"])):
-        try: api("POST", f"/assemblies/d/{DID}/w/{WID}/e/{asm}/instances", {"documentId": DID, "elementId": eid, "isWholePartStudio": True, "includePartTypes": types})
-        except SystemExit as ex: print("  instance skipped:", str(ex)[:160])
+    api("POST", f"/assemblies/d/{DID}/w/{WID}/e/{asm}/instances", {"documentId": DID, "elementId": PS, "isWholePartStudio": True, "includePartTypes": ["PARTS"]})
+    # scan meshes are COMPOSITE parts: the type filters skip them, so insert each by partId (1 GET + 1 POST per mesh)
+    for eid in state["mesh"].values():
+        for p in api("GET", f"/parts/d/{DID}/w/{WID}/e/{eid}"):
+            api("POST", f"/assemblies/d/{DID}/w/{WID}/e/{asm}/instances", {"documentId": DID, "elementId": eid, "partId": p["partId"], "isWholePartStudio": False})
     inst = api("GET", f"/assemblies/d/{DID}/w/{WID}/e/{asm}?includeNonSolids=true")["rootAssembly"]["instances"]
     print(f"assembly rebuilt: {asm} with {len(inst)} instances")
     return asm
