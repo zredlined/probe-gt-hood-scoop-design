@@ -66,7 +66,7 @@ def rect(x0, z0, w, h, **kw): ax.add_patch(Rectangle((x0, z0 * K), w, h * K, **k
 layers = [("printed flange, 6 mm, steel limiter tube inside", gk, gk + 6, "#222"), ("gasket tape, 2 mm (1.5 compressed)", 0, gk, "#8a8a8a"), ("outer hood skin, ~0.8 mm", -skin, 0, "#c21f2f"),
           ("gap between the skins: spacer tube Ø10 fills it", -skin - gap, -skin, "#f4f4f4"), ("inner panel, ~0.8 mm: Ø10.5 hole, not clamped", -skin - gap - inner, -skin - gap, "#c21f2f"), ("aluminium strip 25 x 3", -skin - gap - inner - strip, -skin - gap - inner, "#bdbdbd")]
 for (name, z0, z1, c) in layers: rect(-70, z0, 140, z1 - z0, fc=c, ec="#333", lw=0.8)
-ylab = [gk + 3, gk - 2.5, -4.5, -skin - gap / 2, -skin - gap - 4, -skin - gap - inner - strip - 1]
+ylab = [gk + 4, gk - 2, -5, -skin - gap / 2, -skin - gap - 2, -skin - gap - inner - strip - 4]
 for (name, z0, z1, c), yl in zip(layers, ylab):
     ax.annotate(name, xy=(70, (z0 + z1) / 2 * K), xytext=(95, yl * K), fontsize=11, va="center", arrowprops=dict(arrowstyle="-", lw=0.8, color="#555"))
 rect(-5, -skin - gap, 10, gap, fc="#999", ec="#333")                                        # spacer tube
