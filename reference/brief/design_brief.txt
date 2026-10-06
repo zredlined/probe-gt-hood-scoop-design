@@ -1,0 +1,79 @@
+ONSHAPE MCP BUILD PROMPT — PROBE HOOD SCOOP + BROAD AIR GUIDE
+Revision 2026-10-05. Supersedes the MAX2509-specific handoff and earlier intake proposals.
+
+TASK AND INTENT
+Build actual editable parametric CAD in Onshape using your available MCP tools: an outside hood scoop, bolted mounting system, and removable broad air guide below the hood, delivering outside air toward the existing cone filter beside the battery. The owner may add shielding or an airbox later. The current configuration is an open fresh-air feed, with no promise that the cone will ingest only cold air.
+
+IMPORTANT LATEST DECISION
+DO NOT require a RIDGID nozzle, vacuum-hose connection, or 2.5-inch round restriction. The owner held a RIDGID MAX2509 under the hood and closed it to find a workable LOCATION and mouth FOOTPRINT. Preserve that packaging evidence; replace the nozzle with a broad printed guide. Its measured outside mouth was 195.2625 x 71.4375 mm. We deliberately adopt an approximately matching hood opening, now independent of the nozzle's unmeasured inside dimensions. Do not reproduce a vacuum nozzle or its snap fit.
+
+PLACEMENT SOURCE OF TRUTH
+The owner's attached underside screenshot contains a small white rectangle in an exposed light-colored rectangular region. Owner's clarification: stand facing the car and look at the underside of the raised hood; the box is just to the viewer's right, roughly aligned with the sticker visible in the scans. The physical nozzle test at that location allowed the hood to close. Treat that as the preferred location and approximate footprint, not as a calibrated global coordinate.
+Do not move the opening elsewhere simply to fit the old concept. Do not reuse previous global X295/Y-70 or a 200 x 160 opening. Preserve the owner's viewing convention; underside and top views must not be silently mirrored. The screenshot does not establish an exact XYZ, orientation, or skin thickness. Do not invent millimeter measurements from its pixels or claim that gray scan regions prove absence of structure.
+
+LOCAL DATUMS
+Local O = center of the mouth footprint physically transferred to the hood at the tested location. Local X = long dimension across the car; local Y = rearward toward windshield; local Z = outward normal from hood. Mouth faces -Y, toward bumper. Confirm actual FRONT on the car; screen-up is not a vehicle datum. If the tested rectangle is yawed, expose opening_yaw separately from scoop_yaw and guide_yaw.
+Before releasing a cutting drawing: place a 195 x 71 rounded-rectangle card in the tested position; trace the center and axes on masking tape. Check actual hood skins, reinforcement, bonded seams, and full hood closing sweep. Trial the complete flange/backing/nut/guide footprint, not just the hole. Record O relative to two identifiable physical hood features A and B (A-B, A-O, B-O and side of A-B, plus a third check dimension). Do not mix distances along curved sheet with projected CAD distances. After confirming the waste area, a small pilot hole inside that area can transfer the position to the outside; do not blindly drill through additional layers. Supply a photo or drawing identifying A and B. The sticker is a neighborhood identifier, not a precision datum.
+
+PARAMETERS — MM, INITIAL DESIGN VALUES
+cut_W = 195; cut_L = 71; cut_R = 10; center = O.
+These are proposed cut dimensions based on the physically tested footprint, NOT measured existing hole dimensions. The guide mates to the new opening, so its external flange must be larger.
+clear_mouth_W = 200; clear_mouth_H = 60; mouth_sill = 3 above local skin.
+shell_wall = 3; main_flange_t = 5; flange_border = 20.
+body_W = 210; body_front_Y = -65; body_rear_Y = +95.
+base_W = 250; base_front_Y = -85; base_rear_Y = +115; total base footprint = 250 x 200.
+Approximate scoop maximum height = 66 above local skin (3 sill + 60 clear + 3 roof), before curvature adaptation.
+gasket_uncompressed_t = 2; compressed thickness per actual material.
+metal_backing_t = 2 initial sheet-metal design value.
+M5 fasteners; nominal clearance holes 5.5, finish-drilled.
+All values are editable. Mark measured inputs separately from initial design assumptions.
+
+UPPER SCOOP
+Build a forward-facing hollow raised scoop. Smooth entrance lip, starting internal radius about 3 mm. Inner roof approximately 63 above local hood from Y=-65 through Y=+40, keeping the full downward passage over the aperture, whose aft edge is Y=+35.5. Smoothly close the tail by Y=+95; expose tail length as a parameter so it can be extended if room and printing allow. This short tail is a packaging choice, not an optimized low-drag aerodynamic profile. No rear-facing opening. No obstruction or decorative web across the throat.
+The hood may form the floor outside the hole if the perimeter seal is continuous. Fit the flange to a smooth representation of the actual local outer hood curvature, or use a replaceable contoured adapter and gasket. Do not force a flat warped part down with bolt torque. Do not reuse the old hood curvature polynomial from a different location. Avoid converting the full scan mesh into thousands of CAD faces.
+
+LOWER AIR GUIDE — DEFAULT OPEN CONFIGURATION
+Use a removable broad chute/deflector connected to the underside mounting assembly. It moves with the hood. Its inlet follows the rounded 195 x 71 opening; use a radiused entry and no smaller hose neck. Start with two side cheeks and a smooth turning wall that redirects downward flow toward the exposed filter media. The outlet and underside remain open where needed for clearance, engine movement and drainage. Keep clear of the cone's solid end cap and avoid pressing against the filter.
+Guide depth, guide reach, guide yaw, turn angle, outlet width, outlet height, and engine/filter clearances are physical-fit parameters, NOT dimensions inferred from the nozzle mouth. If the scan cannot establish them, create an adjustable/shallow fit-check version and a hinge/slot or interchangeable guide geometry, explicitly labeled provisional. Do not invent a full nozzle depth from the 71 mm mouth length.
+Allow a 25-50 mm outlet-to-filter gap as a starting packaging target only where measured motion permits. Check all hood sweep positions and engine movement. Use broad radii and no unnecessary corrugated hose. Air can spill from this open guide; it is a practical supplemental cooling feed, not a pressure-sealed intake.
+
+OPTIONAL LATER CLOSED CONFIGURATION
+Provide an optional enclosed wide duct or airbox interface with the same hood opening and fastener pattern. Target a minimum clear cross-sectional area of 100-110 cm2; prefer about 120-135 cm2 where packaging allows. Evaluate areas in sections normal to the local flow path, not just plan-view widths. The rounded 195 x 71 cut is approximately 137.6 cm2; 200 x 60 mouth is 120 cm2 before mesh. If adding mesh, keep high open area and adjust dimensions so it does not become the smallest restrictive section; record open-area assumptions. Do not reduce the system to a 63.5 mm bore (~31.7 cm2). A later sealed airbox requires pressure/temperature testing; these geometry targets do not prove sufficient pressure recovery or flow.
+
+HOOD FASTENING AND BACKING
+Use eight M5 through-bolts, metal washers/clamp strips, metal compression limiters, positive locking nuts suitable for actual temperature, and a conforming metal underside load-spreading frame or strips. Initial local hole centers:
+(-115,-75), (+115,-75), (-115,0), (+115,0), (-115,+105), (+115,+105), (0,-75), (0,+105).
+Positions are parameters, to be moved if ribs/tool clearance require. Keep appropriate edge distance and distributed retention. Initial nominal hole-center distance from outer flange edge is 10 mm. Show washer diameters and tool-access envelopes. Put mounting bolts outside the airflow chamber.
+Stack: bolt head -> metal washer/clamp strip -> printed flange with compression limiter -> weather gasket -> hood sheet -> metal backing -> washer -> locking nut.
+A compression limiter must bear on metal across the relevant compressible stack; a sleeve floating inside plastic does not solve creep. Derive sleeve and bolt lengths from measured installed stack and specified gasket compression. Do not assign a generic tightening torque to crush thin sheet or plastic. Do not pull two separated hood skins together with bolt preload: move the hole or provide fitted spacers across a measured gap. Do not drill/cut reinforcement without a separate assessment; prefer keeping the owner's hole location and adapting flange/backing details.
+All primary scoop retention must be through-bolted and metal-backed. No reliance on self-tappers, adhesive tape, printed screw threads, or heat-set inserts alone. The lower guide attaches independently to metal-backed captive hardware and can be removed without dismantling the upper scoop. Keep retention hardware captive or outside the airflow; nothing loose above the cone. Provide access for assembly and maintenance.
+
+HEAT, PRINTING, WATER
+ASA is a candidate for the exterior scoop, subject to the exact filament datasheet, actual surface temperature and print quality. Do not treat a published softening point as allowable sustained clamped temperature. Under-hood guide material needs its own heat assessment; allow a formed-metal guide using the same mounts if measured conditions exceed the printed material's capability. No unqualified approval of PLA. Printed parts need generous fillets, local flange gussets, sufficient perimeters and solid fastener zones; specify actual slicer wall results. Check warping, support removal and the printer's usable build area for a 250 mm-wide flange. If splitting, use a mechanically supported joint away from critical throat/fastener regions, not a thin glued butt seam.
+Include an installed-low-point drainage path away from filter and electrical parts; keep rain from being deliberately dumped onto the cone. Offer a removable broad splash deflector if needed, without choking flow. The scoop is not rain-proof. Preserve the proper engine air filter.
+
+ONSHAPE WORKFLOW / DELIVERABLES
+Build named, editable variables, sketches, surfaces and solids using the available MCP tools. Work on the prototype while unknowns stay explicit. Do not stop at a prose design plan.
+1. A small fit-check template/flat ring FIRST, showing 195 x 71 opening, R10 corners, center/axes, flange and backing envelopes. Use it to transfer physical position and check mounting access before cutting or printing the entire scoop.
+2. Parametric upper scoop, contour adapter if required, removable open lower guide, and optional future closed-duct interface in separate parts/configurations.
+3. Metal backing and retainer parts, sleeves, washers and fasteners modeled separately; hardware BOM with lengths calculated from measured stack.
+4. Full-size cut/drill template with FRONT, O, physical A/B datums, cut contour, hole centers, and a 100 mm calibration line. Label PRELIMINARY until actual placement, skins, mounting and swept clearances are verified. A planar projection is not automatically a developed pattern for a curved hood; state the method and verify on the car.
+5. Dimensioned top/side/section and exploded assembly views. Explicit installed assembly order. STL/3MF for printable parts, STEP for CAD exchange, DXF for backing and templates.
+6. Check regeneration, wall thickness, watertight printable solids, assembly/tool access, continuous upper seal, broad airflow path and hood/engine swept clearance. State which checks were actually performed. Do not claim CFD, tested strength, exact scan placement, successful tool operations or physical fit without evidence.
+7. Supply a short physical commissioning plan: inspect retention and hot-soak deformation, verify hood latch/closing clearance, check rain drainage, and compare intake temperature under comparable driving. If a sealed box is later added, include intake pressure-drop measurement at high engine demand.
+
+REFERENCE FILES INCLUDED IN THIS PACKAGE (paths relative to this prompt)
+../02_scan_reference/01_engine_bay_mm.stl
+../02_scan_reference/02_hood_outer_mm.stl
+../02_scan_reference/03_hood_underside_PROVISIONAL_mm.stl
+Import in mm at shared origin. Global +Y approximately rearward, +Z up. The underside alignment has unresolved conflicts; it does not certify rib/part clearances. The cone is absent from the scan. If files are unavailable to your session, request them; do not pretend to have read them. Use the attached marked screenshot and owner's physical test to resolve location. Do not let obsolete earlier placement parameters override the latest user instruction.
+
+TECHNICAL BASIS / REFERENCES
+Area checks above are elementary geometry, not a CFD simulation. At assumed 0.16 m3/s engine demand a hypothetical actual 63.5 mm-ID tube has ~50.5 m/s mean velocity, versus ~11.6 m/s through the proposed hood aperture; actual captured flow and losses are unknown. This motivates eliminating the narrow vacuum fitting, not a promised performance gain.
+ASA material guidance: https://help.prusa3d.com/article/asa_1809
+RIDGID model identification only: https://www.ridgid.com/us/en/max2509
+
+PACKAGE PHOTO REFERENCES (relative to this prompt)
+../03_photos/01_user_marked_hood_underside.png — latest owner-selected location, white rectangle.
+../03_photos/02_engine_bay_with_cone_filter.png — installed intake/filter context, absent from scan.
+The folder 02_scan_reference contains historical scan documentation. Its geometric caveats remain relevant; the current brief controls design intent.

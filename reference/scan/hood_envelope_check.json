@@ -1,0 +1,13 @@
+{
+  "method": "Vertical outer-skin minus underside sampled height; within 3 mm XY and >20 mm inside the scan-derived hood outline. Diagnostic only; not a signed watertight collision test.",
+  "samples": 431826,
+  "gap_quantiles_mm": [
+    -29.410284690722904,
+    -9.493955977237896,
+    -2.6798434182332684,
+    10.077626797028586,
+    29.103977636396138
+  ],
+  "fraction_underside_above_skin_more_than_2mm": 0.06761982835679185,
+  "fraction_underside_above_skin_more_than_5mm": 0.0293984151023792
+}

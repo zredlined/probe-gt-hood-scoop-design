@@ -1,0 +1,45 @@
+{
+  "body_checks": {
+    "left_fender": {
+      "sample_count": 4537,
+      "matched_count": 2606,
+      "nn_median_mm": 0.6892889320434012,
+      "nn_p95_mm": 1.2089769384048155,
+      "normal_residual_median_mm": 0.4024076978862333,
+      "normal_residual_p95_mm": 0.9533544277110831
+    },
+    "right_fender": {
+      "sample_count": 2249,
+      "matched_count": 803,
+      "nn_median_mm": 1.054771081535974,
+      "nn_p95_mm": 1.6398301200844936,
+      "normal_residual_median_mm": 0.7815478857582486,
+      "normal_residual_p95_mm": 1.3254705605005594
+    },
+    "left_headlight": {
+      "sample_count": 16243,
+      "matched_count": 16074,
+      "nn_median_mm": 0.6475549066925093,
+      "nn_p95_mm": 1.2303355942404128,
+      "normal_residual_median_mm": 0.30041226431214313,
+      "normal_residual_p95_mm": 0.9326601344599573
+    },
+    "right_headlight": {
+      "sample_count": 11345,
+      "matched_count": 10886,
+      "nn_median_mm": 0.5447780975498319,
+      "nn_p95_mm": 1.0445070704913677,
+      "normal_residual_median_mm": 0.23558097547077306,
+      "normal_residual_p95_mm": 0.7677388213932628
+    },
+    "front_bumper": {
+      "sample_count": 9008,
+      "matched_count": 8582,
+      "nn_median_mm": 0.6552019994031936,
+      "nn_p95_mm": 1.123766989642619,
+      "normal_residual_median_mm": 0.3652501016875622,
+      "normal_residual_p95_mm": 0.8831198176323878
+    }
+  },
+  "note": "Residuals are scan agreement, not physical accuracy. Regions evaluated after fit; not independent metrology."
+}

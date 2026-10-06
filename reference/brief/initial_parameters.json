@@ -1,0 +1,107 @@
+{
+  "revision": "2026-10-05",
+  "units": "mm",
+  "status": "Initial parametric prototype; not a released cutting or fabrication specification",
+  "design": "Forward-facing hood scoop with broad removable lower air guide; no RIDGID nozzle or 2.5-inch neck",
+  "local_frame": {
+    "origin": "Physically transferred center of tested mouth footprint; global XYZ unknown",
+    "x": "Long axis across vehicle",
+    "y": "Rearward toward windshield",
+    "z": "Outward local hood normal",
+    "mouth_faces": "-Y toward bumper"
+  },
+  "owner_measured_packaging_reference": {
+    "MAX2509_outer_mouth_width": 195.2625,
+    "MAX2509_outer_mouth_length": 71.4375,
+    "purpose": "Location and footprint only"
+  },
+  "proposed_cut": {
+    "width": 195,
+    "length": 71,
+    "corner_radius": 10
+  },
+  "scoop": {
+    "mouth_clear_width": 200,
+    "mouth_clear_height": 60,
+    "sill_above_local_skin": 3,
+    "wall": 3,
+    "approx_height": 66,
+    "body_width": 210,
+    "body_y_min": -65,
+    "body_y_max": 95,
+    "flange_thickness": 5,
+    "flange_border": 20,
+    "base_width": 250,
+    "base_y_min": -85,
+    "base_y_max": 115
+  },
+  "fastening": {
+    "bolt": "M5",
+    "clearance_hole_diameter": 5.5,
+    "metal_backing_thickness_initial": 2,
+    "gasket_uncompressed_thickness_initial": 2,
+    "bolt_centers_xy": [
+      [
+        -115,
+        -75
+      ],
+      [
+        115,
+        -75
+      ],
+      [
+        -115,
+        0
+      ],
+      [
+        115,
+        0
+      ],
+      [
+        -115,
+        105
+      ],
+      [
+        115,
+        105
+      ],
+      [
+        0,
+        -75
+      ],
+      [
+        0,
+        105
+      ]
+    ],
+    "bolt_and_sleeve_lengths": null,
+    "note": "Metal backing and compression limiters; adjust layout to actual structure"
+  },
+  "lower_guide": {
+    "type": "Removable broad open chute/deflector",
+    "depth": null,
+    "reach": null,
+    "yaw": null,
+    "turn_angle": null,
+    "note": "Set from physical fit; cone missing in scan; keep broad passage"
+  },
+  "optional_closed_duct": {
+    "minimum_clear_section_target_cm2": [
+      100,
+      110
+    ],
+    "preferred_section_target_cm2": [
+      120,
+      135
+    ],
+    "note": "Geometry targets only; test pressure drop if sealing airbox"
+  },
+  "unresolved": [
+    "Global center and orientation",
+    "Actual hood contour at final site",
+    "Hood skin stack and reinforcement",
+    "Lower guide and filter clearance through hood sweep and engine movement",
+    "Material heat capability",
+    "Printer usable bed dimensions"
+  ]
+}

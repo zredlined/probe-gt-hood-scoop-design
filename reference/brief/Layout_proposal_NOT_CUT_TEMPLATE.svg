@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1100" height="780" viewBox="0 0 1100 780">
+<rect width="1100" height="780" fill="#f7f8fa"/>
+<g font-family="Arial,sans-serif" fill="#152b3a">
+<text x="45" y="44" font-size="25" font-weight="bold">Hood scoop + broad guide — revised proposal</text>
+<text x="45" y="75" font-size="16">Local top view • dimensions in mm • NOT a cutting template</text>
+<g transform="translate(350,345) scale(2.1)">
+<rect x="-125" y="-85" width="250" height="200" rx="6" fill="#dce7eb" stroke="#526d7d" stroke-width="1"/>
+<rect x="-105" y="-65" width="210" height="160" rx="3" fill="#b9dade" fill-opacity=".6" stroke="#197b87" stroke-width="1.5"/>
+
+<rect x="-97.5" y="-35.5" width="195" height="71" rx="10" fill="#fff" stroke="#226bb0" stroke-width="1.5"/>
+<path d="M-100,-65 H100" stroke="#e37822" stroke-width="3"/>
+<path d="M-8,0 H8 M0,-8 V8" stroke="#152b3a" stroke-width=".7"/>
+<circle cx="-115" cy="-75" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="115" cy="-75" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="-115" cy="0" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="115" cy="0" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="-115" cy="105" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="115" cy="105" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="0" cy="-75" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/><circle cx="0" cy="105" r="2.75" fill="white" stroke="#152b3a" stroke-width="1"/></g>
+<text x="350" y="125" text-anchor="middle" font-size="18" font-weight="bold">FRONT / BUMPER</text>
+<path d="M350,188 V145 M343,155 L350,145 L357,155" fill="none" stroke="#152b3a" stroke-width="2"/>
+<text x="350" y="626" text-anchor="middle" font-size="16">REAR / WINDSHIELD</text>
+<text x="665" y="166" font-size="19" font-weight="bold">Keep the tested location</text>
+<text x="665" y="195" font-size="17" fill="#926018">RIDGID footprint used for placement only</text>
+<text x="665" y="241" font-size="19" font-weight="bold">Proposed hood opening</text>
+<text x="665" y="270" font-size="17" fill="#226bb0">195 × 71, R10 corners — blue</text>
+<text x="665" y="296" font-size="15">Verify skin, reinforcement and full mount footprint.</text>
+<text x="665" y="342" font-size="19" font-weight="bold">Forward-facing scoop</text>
+<text x="665" y="371" font-size="17">200 wide × 60 high clear mouth</text>
+<text x="665" y="398" font-size="17">210 × 160 body; ~66 overall height</text>
+<text x="665" y="425" font-size="17">250 × 200 flange envelope</text>
+<text x="665" y="472" font-size="19" font-weight="bold">Retention</text>
+<text x="665" y="501" font-size="17">8 × M5 through-bolts, Ø5.5 holes</text>
+<text x="665" y="528" font-size="17">Metal backing + compression limiters</text>
+<text x="665" y="555" font-size="15">Hole positions adjustable to clear hood ribs.</text>
+<text x="45" y="689" font-size="16">Origin O = center of the physically tested footprint. No global XYZ is claimed.</text>
+<text x="45" y="717" font-size="16">Match the sticker-adjacent underside location on the car; check the entire flange and backing footprint.</text>
+<text x="45" y="747" font-size="15" fill="#a0462b">Broad removable guide below hood; no 2½-inch restriction. Guide depth remains a physical-fit parameter.</text>
+</g></svg>

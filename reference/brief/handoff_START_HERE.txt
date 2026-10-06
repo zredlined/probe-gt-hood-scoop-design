@@ -1,0 +1,30 @@
+PROBE HOOD SCOOP — COMPLETE REFERENCE HANDOFF
+2026-10-05
+
+READ FIRST
+1. Read 01_design_brief/Onshape_build_prompt.txt. It contains the current design request and deliverables for an AI using Onshape MCP.
+2. Inspect both images in 03_photos. The white rectangle is the owner's physically tested preferred location. The other image shows the cone filter that is absent from the scan.
+3. Inspect 01_design_brief/Layout_proposal_NOT_CUT_TEMPLATE.svg. It is a dimensioned concept in a local frame, not a released cutting template.
+4. Read 02_scan_reference/README_Onshape.md before importing models. Import STL as MILLIMETERS at the shared origin, with no independent centering or axis reorientation.
+5. Use 04_parameters/initial_parameters.json as a machine-readable convenience; the current full brief explains qualifications and geometry.
+
+LATEST ACCEPTED DESIGN
+Keep the owner's tested sticker-adjacent location on the underside of the hood. Use a proposed 195 x 71 mm rounded opening with R10 corners. Create a forward-facing scoop above it and a broad removable air guide underneath, aimed toward the cone filter. The RIDGID MAX2509 was only a physical packaging reference: DO NOT build a 2.5-inch bottleneck or require that nozzle. The owner may later add an airbox; the first configuration remains an open fresh-air feed.
+
+WHAT IS INCLUDED
+- Current self-contained Onshape build prompt, including parts, fasteners, metal backing, assembly, fit-check and export requirements.
+- Current layout SVG and machine-readable initial dimensions.
+- Three separate scan STL references, matching color PLY references, and an optional combined layout STL.
+- Scan preview images, import instructions, transforms, mesh-quality and alignment reports.
+- The owner's marked underside screenshot and original installed-intake photo.
+- File inventory with SHA-256 checksums.
+
+IMPORTANT INTERPRETATION
+The STL files are scan REFERENCES, not designed printable scoop/guide parts. The next model must create those parts in Onshape. No exact RIDGID CAD model was found and none is included.
+The cone is absent from the scan. The hood underside registration is provisional and contains unresolved local conflicts. It cannot certify tight clearance or exact rib locations. Physical testing at the owner's selected location governs packaging.
+The proposed cut size, scoop dimensions and bolt pattern remain prototype values. Final physical position, skin stack, full mounting envelope, lower-guide depth/angle and engine/hood movement clearance are not yet measured. Do not invent these values or claim the scan proves them.
+The archived scan manifest and README refer to their original scan package; they are preserved as source documentation. MANIFEST_SHA256.json at the root of this ZIP inventories THIS handoff.
+Earlier intake proposals, old scoop STL envelopes, old global cut coordinates and the superseded MAX2509-specific handoff are deliberately excluded to avoid conflicting design instructions.
+
+SUGGESTED MESSAGE TO THE OTHER MODEL
+"Unzip this package, read START_HERE.txt and 01_design_brief/Onshape_build_prompt.txt, inspect the included photos and scan models, and build the requested parametric scoop, mounting system and broad lower air guide in Onshape through MCP. Preserve the latest owner-selected location. Begin with the fit-check template. Keep unresolved physical measurements explicit and do not mark a cutting drawing final until those checks are resolved."

@@ -1,0 +1,71 @@
+[
+  {
+    "file": "01_engine_bay_mm.stl",
+    "triangles": 250000,
+    "size_MB": 12.500084,
+    "extent_mm": [
+      1630.2811279296875,
+      1439.4954223632812,
+      538.7009887695312
+    ],
+    "detailed_to_light": {
+      "median_mm": 0.04926169663667679,
+      "p95_mm": 0.2257188856601715,
+      "p99_mm": 0.38809460401535034,
+      "max_mm": 4.021639347076416
+    },
+    "light_to_detailed": {
+      "median_mm": 0.04708004370331764,
+      "p95_mm": 0.2204846888780594,
+      "p99_mm": 0.3236546516418457,
+      "max_mm": 0.8022091388702393
+    },
+    "removed_known_background_wiper_fragment_triangles": 0
+  },
+  {
+    "file": "02_hood_outer_mm.stl",
+    "triangles": 99999,
+    "size_MB": 5.000034,
+    "extent_mm": [
+      1487.390380859375,
+      1388.7811889648438,
+      114.10333919525146
+    ],
+    "detailed_to_light": {
+      "median_mm": 0.06272811442613602,
+      "p95_mm": 0.2856747806072235,
+      "p99_mm": 0.4984701871871948,
+      "max_mm": 5.141811370849609
+    },
+    "light_to_detailed": {
+      "median_mm": 0.07397962361574173,
+      "p95_mm": 0.29547932744026184,
+      "p99_mm": 0.42122480273246765,
+      "max_mm": 0.7231802940368652
+    },
+    "removed_known_background_wiper_fragment_triangles": 0
+  },
+  {
+    "file": "03_hood_underside_PROVISIONAL_mm.stl",
+    "triangles": 149999,
+    "size_MB": 7.500034,
+    "extent_mm": [
+      1479.3493041992188,
+      1340.911376953125,
+      212.52215576171875
+    ],
+    "detailed_to_light": {
+      "median_mm": 0.055995043367147446,
+      "p95_mm": 0.2522145211696625,
+      "p99_mm": 0.45656663179397583,
+      "max_mm": 3.6361050605773926
+    },
+    "light_to_detailed": {
+      "median_mm": 0.06694329530000687,
+      "p95_mm": 0.2620028853416443,
+      "p99_mm": 0.3720555305480957,
+      "max_mm": 0.7218692302703857
+    },
+    "removed_known_background_wiper_fragment_triangles": 8361
+  }
+]

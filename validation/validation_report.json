@@ -1,0 +1,197 @@
+{
+ "site": {
+  "O_scan_xy": [
+   110.0,
+   -340.0
+  ],
+  "skin_z_at_O": 104.22,
+  "note": "O is a label-neighbourhood estimate, not a calibrated coordinate"
+ },
+ "checks": {
+  "flange_fit": {
+   "n_samples": 5723,
+   "distance_to_scan_skin_mm": {
+    "min": 0.03,
+    "median": 1.59,
+    "p95": 3.45,
+    "max": 6.41
+   },
+   "design_gasket_gap_mm": 1.5
+  },
+  "under_hood_clearance_to_bay_scan": [
+   {
+    "part": "throat sleeve",
+    "min_mm": 12.2,
+    "at_scan_xyz": [
+     201.0,
+     -372.0,
+     70.0
+    ],
+    "at_local_xyz": [
+     91.0,
+     -37.0,
+     -27.0
+    ]
+   },
+   {
+    "part": "guide U-bracket + flap",
+    "min_mm": 11.8,
+    "at_scan_xyz": [
+     214.0,
+     -355.0,
+     68.0
+    ],
+    "at_local_xyz": [
+     105.0,
+     -20.0,
+     -31.0
+    ]
+   },
+   {
+    "part": "bolt heads (head-down, under strips)",
+    "min_mm": 10.6,
+    "at_scan_xyz": [
+     218.0,
+     -343.0,
+     67.0
+    ],
+    "at_local_xyz": [
+     109.0,
+     -8.0,
+     -34.0
+    ]
+   },
+   {
+    "part": "backing strips",
+    "min_mm": 11.1,
+    "at_scan_xyz": [
+     209.0,
+     -383.0,
+     68.0
+    ],
+    "at_local_xyz": [
+     100.0,
+     -48.0,
+     -27.0
+    ]
+   }
+  ],
+  "cone_placeholder": [
+   {
+    "part": "guide U-bracket + flap",
+    "min_gap_to_cone_placeholder_mm": 53.6
+   },
+   {
+    "part": "throat sleeve",
+    "min_gap_to_cone_placeholder_mm": 103.2
+   }
+  ],
+  "inner_panel_depth_below_skin_mm_PROVISIONAL": {
+   "bolt 1 (-112,-80)": 38.5,
+   "bolt 2 (+112,-80)": 14.9,
+   "bolt 3 (-112,-4)": 20.3,
+   "bolt 4 (+112,-4)": 15.7,
+   "bolt 5 (-112,+72)": 20.2,
+   "bolt 6 (+112,+72)": 18.3,
+   "bolt 7 (+0,-80)": 29.8,
+   "bolt 8 (+0,+72)": 12.3
+  },
+  "areas": {
+   "mouth_clear_cm2": 103.1,
+   "throat_clear_cm2": 137.6,
+   "hood_cut_cm2_with_sleeve": 148.0,
+   "mouth_clear_height_mm": 55.5
+  },
+  "print_orientation": [
+   {
+    "part": "A_body.stl",
+    "orientation": "roof-down (flat top on the bed)",
+    "overhang_area_cm2": 314.6,
+    "overhang_pct_of_surface": 18.1,
+    "volume_cm3": 384.0,
+    "est_grams_ASA": 255.0,
+    "bbox_mm": [
+     244.0,
+     181.0,
+     75.3
+    ]
+   },
+   {
+    "part": "B_bezel.stl",
+    "orientation": "lying on its back (rear face down)",
+    "overhang_area_cm2": 0.0,
+    "overhang_pct_of_surface": 0.0,
+    "volume_cm3": 4.4,
+    "est_grams_ASA": 3.0,
+    "bbox_mm": [
+     196.0,
+     59.9,
+     3.0
+    ]
+   },
+   {
+    "part": "R_rain_cap.stl",
+    "orientation": "flange face down, plug up",
+    "overhang_area_cm2": 1.3,
+    "overhang_pct_of_surface": 0.4,
+    "volume_cm3": 82.2,
+    "est_grams_ASA": 55.0,
+    "bbox_mm": [
+     196.0,
+     60.5,
+     18.0
+    ]
+   },
+   {
+    "part": "S_throat_sleeve.stl",
+    "orientation": "standing upright (as modelled)",
+    "overhang_area_cm2": 0.0,
+    "overhang_pct_of_surface": 0.0,
+    "volume_cm3": 31.2,
+    "est_grams_ASA": 21.0,
+    "bbox_mm": [
+     199.0,
+     75.0,
+     29.9
+    ]
+   },
+   {
+    "part": "C_guide_flap.stl",
+    "orientation": "bracket face down, flap rising at 45\u00b0",
+    "overhang_area_cm2": 136.3,
+    "overhang_pct_of_surface": 30.7,
+    "volume_cm3": 62.3,
+    "est_grams_ASA": 41.0,
+    "bbox_mm": [
+     250.0,
+     121.0,
+     59.2
+    ]
+   },
+   {
+    "part": "T_fit_check_template.stl",
+    "orientation": "flat (as modelled)",
+    "overhang_area_cm2": 0.0,
+    "overhang_pct_of_surface": 0.0,
+    "volume_cm3": 57.6,
+    "est_grams_ASA": 38.0,
+    "bbox_mm": [
+     244.0,
+     181.0,
+     2.0
+    ]
+   }
+  ],
+  "tool_access": {
+   "nut_centre_to_cowl_side_wall_mm": 14.0,
+   "nut_centre_to_cowl_front_face_mm": 15,
+   "nut_centre_to_cowl_rear_face_mm": 12,
+   "socket_radius_assumed_mm": 8.5,
+   "washer_edge_to_side_wall_mm": 8.0,
+   "side_margin_mm": 5.5,
+   "front_margin_mm": 6.5,
+   "rear_margin_mm": 3.5,
+   "verdict": "OK"
+  }
+ }
+}

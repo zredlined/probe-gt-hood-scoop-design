@@ -1,0 +1,30 @@
+{
+ "fsid": "a1b21d4e9a6dbad5e594ea99",
+ "mesh": {
+  "hood_outer": "40a6634d3d9b585015d35219",
+  "hood_underside": "9d8b433da0484ff8de26c0c8",
+  "engine_bay": "9b0f22c533aa8d784da441c2"
+ },
+ "parts": {
+  "A body: flange + cowl, one piece (black ASA, print roof-down)": "JQH",
+  "B2 mouth bezel (purple)": "RxCD",
+  "S throat sleeve / liner (purple ASA, install from below, ends flush with strips)": "R8CD",
+  "R rain cap (purple, snap-in blank)": "RHDD",
+  "C lower guide: U-bracket + flap (PROVISIONAL, purple ASA, prints bracket-down, clamped by the 2 middle bolts)": "RkDD",
+  "D backing strip front 25x3 flat bar, L=249 (3x \u00d86.5)": "REED",
+  "D backing strip rear 25x3 flat bar, L=249 (3x \u00d86.5)": "RWED",
+  "D backing strip side L 25x3 flat bar, L=110 (1x \u00d86.5)": "RoED",
+  "D backing strip side R 25x3 flat bar, L=110 (1x \u00d86.5)": "RyED",
+  "HW M6x50 head-down stack 1": "R8ED",
+  "HW M6x50 head-down stack 2": "RkFD",
+  "HW M6x50 head-down stack 3 (clamps guide)": "RMGD",
+  "HW M6x50 head-down stack 4 (clamps guide)": "R0GD",
+  "HW M6x50 head-down stack 5": "RcHD",
+  "HW M6x50 head-down stack 6": "REID",
+  "HW M6x50 head-down stack 7": "RsID",
+  "HW M6x50 head-down stack 8": "RUJD",
+  "T fit-check template (flat, PRELIMINARY)": "R8JD"
+ },
+ "asm": "6da6d90250a1b357294ec80b",
+ "flat_ps": "fe5adc9eaca9ea9bf1dfaafc"
+}

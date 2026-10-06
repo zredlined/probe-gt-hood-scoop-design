@@ -1,0 +1,52 @@
+{
+  "status": "PROVISIONAL: useful layout reference; clearance approval requires physical checks",
+  "method": "Rigid unit-scale fit of selected underside painted perimeter to isolated outer hood silhouette. No surface warping or forced fusion. Outer silhouette derived by subtracting shared body panels. Folded skin surfaces need not coincide.",
+  "initial_perimeter_samples": 1938,
+  "fitted_samples_after_excluding_background_or_nonmatching_edges": 1691,
+  "excluded_from_fit_not_deleted_from_scan": 247,
+  "selection_thresholds_mm": {
+    "XY": 20,
+    "absolute_Z": 12
+  },
+  "fitted_edge_xy_mm": {
+    "median": 4.414074902997884,
+    "p90": 10.172842589207937,
+    "p95": 12.317985206759507
+  },
+  "fitted_edge_abs_z_mm": {
+    "median": 1.2675654658102644,
+    "p95": 3.9768803868682028
+  },
+  "transform_native_to_reference": [
+    [
+      -0.9833623273881458,
+      -0.18014469397324956,
+      -0.023375677683483018,
+      -31.4614823584279
+    ],
+    [
+      0.15590579917065414,
+      -0.9029991745270326,
+      0.4003571812625294,
+      -359.43423660663495
+    ],
+    [
+      -0.09323043955072535,
+      0.3900517658424762,
+      0.9160609723727239,
+      -142.82256504017374
+    ],
+    [
+      0.0,
+      0.0,
+      0.0,
+      1.0
+    ]
+  ],
+  "limitations": [
+    "Perimeter segmentation trims some outer-edge samples near shared body panels.",
+    "A folded inner rim is not the same measured surface as the top skin.",
+    "No common global markers connect the hood sides.",
+    "Residuals are fitted-edge agreement, not an accuracy certification."
+  ]
+}

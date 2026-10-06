@@ -1,0 +1,88 @@
+{
+ "parameters": {
+  "cutW": 195,
+  "cutL": 71,
+  "cutR": 10,
+  "sleeveWall": 2,
+  "skinT": 0.8,
+  "innerGap": 21,
+  "innerT": 0.8,
+  "gasketT": 1.5,
+  "baseW": 244,
+  "baseFront": 97,
+  "baseRear": 84,
+  "baseR": 10,
+  "baseT": 6,
+  "bodyW": 196,
+  "bodyFront": 65,
+  "bodyRear": 60,
+  "roofTop": 72,
+  "wall": 3,
+  "bodyR": 4,
+  "chamferF": 4,
+  "chamferR": 10,
+  "mouthW": 186,
+  "mouthR": 4,
+  "lipR": 2.5,
+  "bezelW": 5,
+  "boltX": 112,
+  "boltYF": 80,
+  "boltYM": -4,
+  "boltYR": 72,
+  "holeD": 6.5,
+  "boltL": 50,
+  "backingT": 3,
+  "guideW": 200,
+  "guideReach": 50,
+  "guideAngle": 45,
+  "cheekH": 55,
+  "guideT": 3,
+  "logoW": 92
+ },
+ "derived": {
+  "mouthH": 55.5,
+  "mouth_area_cm2": 103.09265482457437,
+  "throat_area_cm2": 137.5915926535898,
+  "hood_cut": [
+   199,
+   75,
+   12
+  ],
+  "stackBottom": -24.1,
+  "bolts": [
+   [
+    -112,
+    -80
+   ],
+   [
+    112,
+    -80
+   ],
+   [
+    -112,
+    -4
+   ],
+   [
+    112,
+    -4
+   ],
+   [
+    -112,
+    72
+   ],
+   [
+    112,
+    72
+   ],
+   [
+    0,
+    -80
+   ],
+   [
+    0,
+    72
+   ]
+  ],
+  "nut_to_cowl_wall": 14.0
+ }
+}
