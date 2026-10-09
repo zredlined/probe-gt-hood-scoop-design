@@ -21,7 +21,7 @@ Hood up. Hold the template against the **underside** of the hood on the bare met
 
 Look for:
 - The whole template lies on flat metal. No hole should land on a raised rib or on the black insulation pad. If one does, slide the template a little and tell us how far.
-- Nothing above the template inside the engine bay would be hit by a box 65 mm tall sitting where the template is. If you have a 65 mm block, set it on the patch and close the hood slowly. It should close with room to spare.
+- Nothing above the template inside the engine bay would be hit by a box 70 mm tall sitting where the template is. If you have a 70 mm block, set it on the patch and close the hood slowly. It should close with room to spare.
 
 Tape the template down. Mark through all 8 holes and draw around the inside of the big opening. Write the hole numbers next to the marks (they are on the drawing above).
 
@@ -49,39 +49,44 @@ That is the end of Round 1. The design will be updated with the real depths, and
 ## Round 2 — cut, make, print, fit
 
 ### Parts to have ready
-- Everything in [BOM.md](BOM.md). Print the body in black ASA roof-down with supports only under the flange ring; everything else per the picture below. ASA wants a closed printer door, a hot bed and a brim on the body.
+Everything in [BOM.md](BOM.md). Nothing needs supports. The plate prints top face down (the curved side ends up on top), the cowl roof down. ASA wants a closed printer door, a hot bed, and a brim on the plate. If you use the AMS, the logo in the first three layers of the cowl is where the purple goes.
 
 ![Print orientations](images/fig_print_orientation.png)
 
-### 6. Cut the opening
+### 6. Join the cowl to the plate (bench)
+Set the plate on the bench **upside down**, curved side up. Drop the cowl onto it the right way round (logo reads from the front, raked mouth toward the FRONT notch side of the plate); the lip around the cowl's bottom edge sits in the groove in the plate. Hold them together and drive the six **M4 self-tapping screws** up through the countersunk holes in the plate into the bosses inside the cowl. Snug, not cranked; they only hold a plastic lid on. Turn the assembly over and check the cowl sits flush all round.
+
+![Exploded](images/fig_exploded.png)
+
+### 7. Cut the opening
 Mask the paint. From outside, drill a 3 mm hole at the template centre first and check the outline looks right against the hood from above. Then cut the outer skin to **199 x 75 mm with 12 mm radius corners**: a hole saw or step drill at the four corners, a jigsaw with a fine metal blade between them. Stay 1 mm inside the line and file to size. Cut the inner panel to the same size from below. Deburr everything and prime the bare metal.
 
-### 7. Open the bolt holes
+### 8. Open the bolt holes
 Outer skin: **6.5 mm**. Inner panel: **10.5 mm** (a step drill is easiest). The inner panel gets the bigger hole on purpose: a spacer tube passes through it and bears on the outer skin, so the inner panel is never squeezed.
 
-### 8. Make the metal bits
+### 9. Make the metal bits
 Flat bar 25 x 3: two long pieces, 249 mm, each with three 6.5 mm holes. The easy way to mark them is to lay the template on the bar and mark through holes 1-7-2 for one strip and 5-8-6 for the other. Two short pieces, 110 mm, with one hole in the middle. Round the ends and deburr.
 
-Tube Ø10: eight **limiters, 6.0 mm long** (they must all be the same length, square ends). Eight **spacers**, one per hole, each cut to that hole's measured depth minus 2.4 mm (that is minus the skin and a washer). Label them 1 to 8.
+Tube Ø10: eight **limiters, 8.0 mm long** (they must all be the same length, square ends). Eight **spacers**, one per hole, each cut to that hole's measured depth minus 2.4 mm (that is minus the skin and a washer). Label them 1 to 8.
 
-### 9. Bolt it on
+### 10. Bolt it on
 
 ![Bolt stack](images/fig_bolt_stack.png)
 
-1. Stick the foam gasket tape around the underside of the flange as one unbroken loop near the edge, and a second loop around the throat.
-2. Push the eight limiter tubes into the flange holes. Set the body on the hood over the opening.
-3. From below, for each hole: slide a washer onto the spacer tube, push the tube up through the big inner-panel hole until the washer touches the outer skin, hold a strip under it, and push an **M6x50 up from below** through strip, tube, skin and flange. On top: washer and nyloc, finger tight. Long strips front and rear, short strips on the two middle bolts.
+1. Stick the foam gasket tape around the underside of the plate as one unbroken loop near the edge, and a second loop around the throat.
+2. Push the eight limiter tubes into the plate holes. Set the assembly on the hood over the opening.
+3. From below, for each hole: slide a washer onto the spacer tube, push the tube up through the big inner-panel hole until the washer touches the outer skin, hold a strip under it, and push an **M6x50 up from below** through strip, tube, skin and plate. On top: washer and nyloc, finger tight. Long strips front and rear, short strips on the two middle bolts.
 4. Tighten all eight in a criss-cross, finishing at **5 to 6 N·m** with a 10 mm socket. The steel tubes take the load; you cannot crush the plastic.
 5. Push the **sleeve** up from below into the throat until it seats. Run a bead of RTV where it passes the inner panel.
-6. Glue the **bezel** into the recess around the mouth with three dabs of CA, flush with the face. Try the **rain cap**.
+6. Try the **rain cap**: it pushes into the mouth and the lip sits against the raked face.
 7. **Guide**: take the two middle bolts out, slide the bracket's arms between the strips and the bolt heads, put the bolts back and torque. Press a lump of modelling clay onto the flap tip, close the hood fully, open it and look at the clay: you want at least 25 mm to the cone and 15 mm to any hose or wire.
 8. Trim the thread sticking up above the nuts (cover the paint), or fit acorn nuts over them.
 
 ![Tool access](images/fig_tool_access.png)
 
-### 10. Check it works
+### 11. Check it works
 - Close the hood slowly three times, then normally. Nothing should touch.
-- After a hot run: look for sag in the body, lifting of the bezel, droop in the flap.
+- After a hot run: look for sag in the cowl, droop in the flap.
 - Hose test with the cap off: water should run out of the mouth and drip off the flap in front of the cone, not onto it. Cap on: dry throat.
 - Re-torque the eight nuts after the first session.
 

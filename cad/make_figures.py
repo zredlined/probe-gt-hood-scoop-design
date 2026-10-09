@@ -1,4 +1,4 @@
-"""Figures for the build guide. Usage: python3 cad/make_figures.py stl docs/images"""
+"""Figures for the build guide. Usage: python make_figures.py <stl_dir> <out_dir>"""
 import sys, os, json, numpy as np, trimesh, matplotlib
 matplotlib.use("Agg"); import matplotlib.pyplot as plt
 from matplotlib.patches import FancyBboxPatch, Rectangle, Circle, Polygon, FancyArrowPatch
@@ -12,8 +12,8 @@ fit = json.load(open(os.path.join(HERE, "site_fit.json"))); O = np.array(fit["O_
 n = np.array([-cf[1], -cf[2], 1.0]); n /= np.linalg.norm(n); zl = n; xl = np.cross([0, 1, 0], zl); xl /= np.linalg.norm(xl); yl = np.cross(zl, xl); Rm = np.c_[xl, yl, zl]
 def to_global(V): return (Rm @ np.asarray(V).T).T + np.array([O[0], O[1], zc])
 BLK, PUR, ALU, YEL, HOOD = (0.10, 0.10, 0.11), (0.46, 0.17, 0.58), (0.78, 0.79, 0.81), (0.95, 0.85, 0.2), (0.60, 0.17, 0.42)
-parts = {k: trimesh.load(f"{STL}/{k}.stl") for k in ["A_body", "B_bezel", "S_throat_sleeve", "R_rain_cap", "C_guide_flap", "D_backing_strips_reference", "T_fit_check_template"]}
-col = {"A_body": BLK, "B_bezel": PUR, "S_throat_sleeve": PUR, "R_rain_cap": PUR, "C_guide_flap": PUR, "D_backing_strips_reference": ALU, "T_fit_check_template": YEL}
+parts = {k: trimesh.load(f"{STL}/{k}.stl") for k in ["A1_flange_plate", "A2_cowl", "S_throat_sleeve", "R_rain_cap", "C_guide_flap", "D_backing_strips_reference", "T_fit_check_template"]}
+col = {"A1_flange_plate": BLK, "A2_cowl": BLK, "S_throat_sleeve": PUR, "R_rain_cap": PUR, "C_guide_flap": PUR, "D_backing_strips_reference": ALU, "T_fit_check_template": YEL}
 def label(img, items, title=None):
     im = Image.fromarray(img); d = ImageDraw.Draw(im)
     try: f = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 26); ft = ImageFont.truetype("/System/Library/Fonts/Helvetica.ttc", 34)
@@ -26,18 +26,18 @@ def label(img, items, title=None):
 
 # 1) exploded view -----------------------------------------------------------------------------------------------
 def sh(m, dz=0, dy=0): v = m.vertices.copy(); v[:, 2] += dz; v[:, 1] += dy; return (v, m.faces)
-items = [(*sh(parts["A_body"], 0), col["A_body"]), (*sh(parts["B_bezel"], 0, -40), col["B_bezel"]), (*sh(parts["R_rain_cap"], 0, -40), col["R_rain_cap"]),
+items = [(*sh(parts["A2_cowl"], 35), col["A2_cowl"]), (*sh(parts["A1_flange_plate"], 0), col["A1_flange_plate"]), (*sh(parts["R_rain_cap"], 35, -25), col["R_rain_cap"]),
          (*sh(parts["S_throat_sleeve"], -40), col["S_throat_sleeve"]), (*sh(parts["D_backing_strips_reference"], -70), col["D_backing_strips_reference"]), (*sh(parts["C_guide_flap"], -95), col["C_guide_flap"])]
-img = render(items, cam_dir=(0.6, -0.65, 0.45), up=(0, 0, 1), W=1600, H=1000, mmpp=0.33, center=[0, -20, -30])
-im = label(img, [(900, 250, "A  body: flange + cowl (black ASA)", 1080, 130), (640, 300, "B  mouth bezel (purple)", 120, 130), (450, 430, "R  rain cap (purple)", 100, 640),
-                 (990, 640, "S  throat sleeve (purple)", 1150, 560), (700, 640, "D  4 aluminium strips 25x3", 160, 840), (1160, 820, "C  guide bracket + flap (purple)", 1100, 930)],
-           "Exploded view (hood between A and S; strips and guide sit under the hood)")
+img = render(items, cam_dir=(0.6, -0.65, 0.45), up=(0, 0, 1), W=1600, H=1000, mmpp=0.36, center=[0, -20, 5])
+im = label(img, [(900, 230, "A2  cowl (black ASA), 6x M4 to the plate", 1060, 110), (1060, 470, "A1  flange plate, 8x M6 to the hood", 1130, 540), (430, 330, "R  rain cap (purple)", 100, 160),
+                 (990, 640, "S  throat sleeve (purple)", 1150, 580), (700, 660, "D  4 aluminium strips 25x3", 160, 860), (1160, 830, "C  guide bracket + flap (purple)", 1100, 940)],
+           "Exploded view (hood between A1 and S; strips and guide sit under the hood)")
 im.save(f"{OUT}/fig_exploded.png")
 
 # 2) on the car ---------------------------------------------------------------------------------------------------
 hood = trimesh.load(R + "scan/02_hood_outer_mm.stl", process=False)
 v = hood.vertices; k = (np.abs(v[:, 0] - O[0]) < 330) & (np.abs(v[:, 1] - O[1]) < 300); hf = hood.faces[k[hood.faces].all(1)]
-it = [(v, hf, HOOD)] + [(to_global(parts[p].vertices), parts[p].faces, col[p]) for p in ("A_body", "B_bezel")]
+it = [(v, hf, HOOD)] + [(to_global(parts[p].vertices), parts[p].faces, col[p]) for p in ("A1_flange_plate", "A2_cowl")]
 img = render(it, cam_dir=(0.55, -0.6, 0.5), up=(0, 0, 1), W=1600, H=900, mmpp=0.42, center=[O[0], O[1], zc])
 label(img, [], "On the hood scan — viewed from the front-right of the car").save(f"{OUT}/fig_on_car.png")
 
@@ -63,33 +63,33 @@ K = 3.0
 fig, ax = plt.subplots(figsize=(13, 8), dpi=120); ax.set_aspect("equal"); ax.axis("off")
 gk, skin, gap, inner, strip = P["gasketT"], P["skinT"], P["innerGap"], P["innerT"], P["backingT"]
 def rect(x0, z0, w, h, **kw): ax.add_patch(Rectangle((x0, z0 * K), w, h * K, **kw))
-layers = [("printed flange, 6 mm, steel limiter tube inside", gk, gk + 6, "#222"), ("gasket tape, 2 mm (1.5 compressed)", 0, gk, "#8a8a8a"), ("outer hood skin, ~0.8 mm", -skin, 0, "#c21f2f"),
+layers = [("printed flange plate, 8 mm, steel limiter tube inside", gk, gk + 8, "#222"), ("gasket tape, 2 mm (1.5 compressed)", 0, gk, "#8a8a8a"), ("outer hood skin, ~0.8 mm", -skin, 0, "#c21f2f"),
           ("gap between the skins: spacer tube Ø10 fills it", -skin - gap, -skin, "#f4f4f4"), ("inner panel, ~0.8 mm: Ø10.5 hole, not clamped", -skin - gap - inner, -skin - gap, "#c21f2f"), ("aluminium strip 25 x 3", -skin - gap - inner - strip, -skin - gap - inner, "#bdbdbd")]
 for (name, z0, z1, c) in layers: rect(-70, z0, 140, z1 - z0, fc=c, ec="#333", lw=0.8)
-ylab = [gk + 4, gk - 2, -5, -skin - gap / 2, -skin - gap - 2, -skin - gap - inner - strip - 4]
+ylab = [gk + 5, gk - 2, -5, -skin - gap / 2, -skin - gap - 2, -skin - gap - inner - strip - 4]
 for (name, z0, z1, c), yl in zip(layers, ylab):
     ax.annotate(name, xy=(70, (z0 + z1) / 2 * K), xytext=(95, yl * K), fontsize=11, va="center", arrowprops=dict(arrowstyle="-", lw=0.8, color="#555"))
 rect(-5, -skin - gap, 10, gap, fc="#999", ec="#333")                                        # spacer tube
 rect(-6.25, -skin - 1.6, 12.5, 1.6, fc="#999", ec="#333")                                   # washer under skin
-rect(-5, gk, 10, 6, fc="#999", ec="#333")                                                   # limiter
+rect(-5, gk, 10, 8, fc="#999", ec="#333")                                                   # limiter
 zhead = -skin - gap - inner - strip - 3.3
-rect(-3.2, zhead, 6.4, 3.3 + strip + inner + gap + skin + gk + 6 + 1.6 + 6 + 9, fc="#555", ec="#333")   # bolt
+rect(-3.2, zhead, 6.4, 3.3 + strip + inner + gap + skin + gk + 8 + 1.6 + 6 + 7, fc="#555", ec="#333")   # bolt
 rect(-5.25, zhead, 10.5, 3.3, fc="#333", ec="#111")                                         # head
-rect(-6, gk + 6, 12, 1.6, fc="#999", ec="#333"); rect(-5, gk + 7.6, 10, 6, fc="#999", ec="#333")   # washer + nut on top
+rect(-6, gk + 8, 12, 1.6, fc="#999", ec="#333"); rect(-5, gk + 9.6, 10, 6, fc="#999", ec="#333")   # washer + nut on top
 L = [("M6x50 button head, 4 mm hex key. Goes in from BELOW.", zhead + 1.6, -5.25, True), ("washer Ø12 sits against the outer skin", -skin - 0.8, -6.25, False),
-     ("washer + M6 nyloc on TOP, 10 mm socket", gk + 10, -5, True), ("about 9 mm of thread sticks out: trim it, or fit an acorn nut", gk + 19, -3.2, False)]
+     ("washer + M6 nyloc on TOP, 10 mm socket", gk + 12, -5, True), ("about 7 mm of thread sticks out: trim it, or fit an acorn nut", gk + 20, -3.2, False)]
 for txt, z, x, bold in L:
     ax.annotate(txt, xy=(x, z * K), xytext=(-90, z * K), fontsize=11, ha="right", va="center", weight="bold" if bold else "normal", arrowprops=dict(arrowstyle="-", lw=0.8, color="#555"))
 ax.annotate("", (-78, 0), (-78, (-skin - gap - inner) * K), arrowprops=dict(arrowstyle="<->", lw=1.2))
 ax.text(-82, (-skin - gap - inner) / 2 * K, "MEASURE this at each\npilot hole (Round 1)", fontsize=11, va="center", ha="right", weight="bold")
-ax.set_xlim(-330, 330); ax.set_ylim((zhead - 4) * K, (gk + 24) * K); ax.set_title("One of the eight bolts, section through the hood (not to scale vertically)", fontsize=14, loc="left")
+ax.set_xlim(-330, 330); ax.set_ylim((zhead - 4) * K, (gk + 26) * K); ax.set_title("One of the eight bolts, section through the hood (not to scale vertically)", fontsize=14, loc="left")
 fig.tight_layout(); fig.savefig(f"{OUT}/fig_bolt_stack.png", facecolor="white"); plt.close()
 
 # 5) print orientations ---------------------------------------------------------------------------------------------
 def Rx(deg):
     t = np.radians(deg); return np.array([[1, 0, 0], [0, np.cos(t), -np.sin(t)], [0, np.sin(t), np.cos(t)]])
-orient = [("A_body", "A body — roof DOWN (supports under flange only)", Rx(180)), ("B_bezel", "B bezel — lying on its back", Rx(-90)), ("S_throat_sleeve", "S sleeve — standing", np.eye(3)),
-          ("R_rain_cap", "R rain cap — flange down, plug up", Rx(90)), ("C_guide_flap", "C guide — bracket down, flap rising 45°", Rx(180)), ("T_fit_check_template", "T template — flat (PLA)", np.eye(3))]
+orient = [("A1_flange_plate", "A1 plate — top face DOWN, no supports", Rx(180)), ("A2_cowl", "A2 cowl — roof DOWN, no supports", Rx(180)), ("S_throat_sleeve", "S sleeve — standing", np.eye(3)),
+          ("R_rain_cap", "R rain cap — flange down, plug up", Rx(90 + P["rakeDeg"])), ("C_guide_flap", "C guide — bracket down, flap rising 45°", Rx(180)), ("T_fit_check_template", "T template — flat (PLA)", np.eye(3))]
 tiles = []
 for k, title, Rot in orient:
     m = parts[k]; V = (Rot @ m.vertices.T).T; V[:, 2] -= V[:, 2].min(); c = V.mean(0); c[2] = V[:, 2].max() / 2

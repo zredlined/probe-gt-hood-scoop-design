@@ -20,9 +20,10 @@ from shapely.geometry import box as sbox, Polygon
 DEFAULTS = dict(
     cutW=195, cutL=71, cutR=10, sleeveWall=2,
     skinT=0.8, innerGap=21, innerT=0.8, gasketT=1.5,
-    baseW=244, baseFront=97, baseRear=84, baseR=10, baseT=6,
-    bodyW=196, bodyFront=65, bodyRear=60, roofTop=72, wall=3, bodyR=4, chamferF=4, chamferR=10,
-    mouthW=186, mouthR=4, lipR=2.5, bezelW=5,
+    baseW=244, baseFront=97, baseRear=84, baseR=10, baseT=8,
+    bodyW=196, bodyFront=65, bodyRear=60, roofTop=74, wall=3, bodyR=4, chamferF=4, chamferR=10, rakeDeg=20,
+    mouthW=186, mouthR=4, lipR=2.5, bezelW=5, buildBezel=0,
+    bossD=10, bossH=9, screwPilot=3.4, screwClear=4.3, captiveNuts=0, nutAF=7.2, nutH=5.2,
     boltX=112, boltYF=80, boltYM=-4, boltYR=72, holeD=6.5, boltL=50, backingT=3,
     guideW=200, guideReach=50, guideAngle=45, cheekH=55, guideT=3,
     logoW=92,
@@ -93,54 +94,86 @@ def build(P):
     gTop = gk; z0 = gTop + baseT; mouthH = top - chF - bzW - gk - baseT
     parts = {}
 
-    # ---- A body: flange (hood-matched) + cowl, one piece ----
-    base = ex(rrect(baseW, baseL, baseR, 0, baseCy), gTop - 12, gTop + baseT)
+    # ---- A1 flange plate: hood-matched underside, flat top (print top-face-down) ----
+    t = np.tan(np.radians(P["rakeDeg"]))
+    bossPos = [(-(bodyW / 2 - w - 4), -45), ((bodyW / 2 - w - 4), -45), (-(bodyW / 2 - w - 4), 45), ((bodyW / 2 - w - 4), 45), (-50, yR - w - 4), (50, yR - w - 4)]
+    plate = ex(rrect(baseW, baseL, baseR, 0, baseCy), gTop - 12, gTop + baseT)
     sag = lambda X, Y: gTop + SAG["D"] * X**2 + SAG["E"] * X * Y + SAG["F"] * Y**2
     below = heightfield_below(np.linspace(-baseW / 2 - 15, baseW / 2 + 15, 25), np.linspace(bF - 15, bR + 15, 21), sag, gTop - 40)
-    base = D(base, below)
+    plate = D(plate, below)
     tools = [ex(rrect(cutW, cutL, cutR), gTop - 20, gTop + baseT + 10)]
     tools += [cyl(x, y, gTop - 20, gTop + baseT + 10, holeD) for x, y in bolts]
     tools += [D(cyl(x, y, gTop + baseT - 0.6, gTop + baseT + 1, 14), cyl(x, y, gTop + baseT - 2, gTop + baseT + 2, 11)) for x, y in bolts]   # debossed rings
     tools += [ex(rrect(holeW + 0.4, holeL + 0.4, holeR), gTop - 2, gTop + 1.5)]                                                            # sleeve seat
-    base = D(base, *tools)
+    # groove for the cowl tongue (3 wide, 1.5 deep), interrupted at the mouth
+    groove = D(ex(rrect(bodyW, yR - yF, bodyR, 0, (yF + yR) / 2), gTop + baseT - 1.5, gTop + baseT + 1), ex(rrect(bodyW - 6, (yR - yF) - 6, max(bodyR - 3, 0.5), 0, (yF + yR) / 2), gTop + baseT - 3, gTop + baseT + 2))
+    groove = D(groove, box(-mouthW / 2, yF - 5, gTop + baseT - 3, mouthW / 2, yF + 6, gTop + baseT + 2))
+    tools.append(groove)
+    # 6 countersunk M4 screw holes (screws go up from below, on the bench)
+    for x, y in bossPos:
+        tools.append(cyl(x, y, gTop - 20, gTop + baseT + 2, P["screwClear"]))
+        zu = sag(x, y); cone = trimesh.creation.cone(radius=12, height=12, sections=48); cone.apply_translation([x, y, zu + P["screwClear"] - 12]); tools.append(cone)   # 90° countersink, Ø screwClear*2 at the surface
+    parts["A1_flange_plate"] = D(plate, *tools)
+
+    # ---- A2 cowl: raked mouth face, tongue, 6 screw bosses (print roof-down) ----
+    z0 = gTop + baseT; mouthH = top - chF - bzW - z0
     cowl = ex(rrect(bodyW, yR - yF, bodyR, 0, (yF + yR) / 2), z0, top)
+    yE = yF + (top - z0) * t                                     # roof front edge after the rake
+    rake = wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 60, z0 - 10), (yF - 10 * t, z0 - 10), (yF + (top + 10 - z0) * t, top + 10), (yF - 60, top + 10)])
+    cowl = D(cowl, rake)
     wedges = []
-    if chF > 0: wedges.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 2, top - chF - 2), (yF + chF + 2, top + 2), (yF - 2, top + 2)]))
+    if chF > 0: wedges.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 60, top - chF + (yF - 60 - yE)), (yE + chF + 10, top + 10), (yF - 60, top + 10)]))
     if chR > 0: wedges.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yR + 2, top - chR - 2), (yR - chR - 2, top + 2), (yR + 2, top + 2)]))
     if wedges: cowl = D(cowl, *wedges)
-    cav = ex(rrect(bodyW - 2 * w, (yR - yF) - 2 * w, max(bodyR - w, 0.5), 0, (yF + yR) / 2), z0 - 1, top - w)
-    wo = w * 1.4142; cw = []
-    if chF > 0: cw.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 2, top - chF - wo - 2), (yF + chF + wo + 2, top + 2), (yF - 2, top + 2)]))
+    cav = ex(rrect(bodyW - 2 * w, (yR - yF) - 2 * w, max(bodyR - w, 0.5), 0, (yF + yR) / 2), z0 - 2, top - w)
+    wo = w * 1.4142; off = w / np.cos(np.radians(P["rakeDeg"]))
+    cw = [wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 60, z0 - 10), (yF + off - 10 * t, z0 - 10), (yF + off + (top + 10 - z0) * t, top + 10), (yF - 60, top + 10)])]
+    if chF > 0: cw.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 60, top - chF - wo + (yF - 60 - yE)), (yE + chF + wo + 10, top + 10), (yF - 60, top + 10)]))
     if chR > 0: cw.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yR + 2, top - chR - wo - 2), (yR - chR - wo - 2, top + 2), (yR + 2, top + 2)]))
-    if cw: cav = D(cav, *cw)
-    mouth = rrbox_y(mouthW, mouthH, mouthR, 0, z0 + mouthH / 2, yF - 5, yF + w + 2)
-    rebate = rrbox_y(mouthW + 2 * bzW, mouthH + bzW + 0.01, mouthR + bzW, 0, z0 - 0.01 + (mouthH + bzW + 0.01) / 2, yF - 5, yF + 3)
-    cowl = D(cowl, cav, mouth, rebate)
-    # logo deboss (reads correctly standing in front of the car)
+    cav = D(cav, *cw)
+    mouth = rrbox_y(mouthW, mouthH, mouthR, 0, z0 + mouthH / 2, yF - 10, yF + 40)
+    cuts = [cav, mouth]
+    if P["buildBezel"]:
+        cuts.append(rrbox_y(mouthW + 2 * bzW, mouthH + bzW + 0.01, mouthR + bzW, 0, z0 - 0.01 + (mouthH + bzW + 0.01) / 2, yF - 10, yF + 3))
+    cowl = D(cowl, *cuts)
+    # tongue (2.6 wide, 1.5 tall) into the plate groove, interrupted at the mouth
+    tongue = D(ex(rrect(bodyW - 0.4, (yR - yF) - 0.4, bodyR, 0, (yF + yR) / 2), z0 - 1.5, z0 + 0.5), ex(rrect(bodyW - 5.6, (yR - yF) - 5.6, max(bodyR - 2.8, 0.5), 0, (yF + yR) / 2), z0 - 3, z0 + 1))
+    tongue = D(tongue, box(-mouthW / 2, yF - 5, z0 - 3, mouthW / 2, yF + 12, z0 + 1))
+    # bosses with 45° tops, pilot bores (self-tapping M4) or captive nyloc pockets
+    bosses = []
+    for x, y in bossPos:
+        bcyl = cyl(x, y, z0, z0 + P["bossH"], P["bossD"]); bc = trimesh.creation.cone(radius=P["bossD"] / 2, height=P["bossD"] / 2, sections=48); bc.apply_translation([x, y, z0 + P["bossH"]])
+        boss = U(bcyl, bc)
+        boss = D(boss, cyl(x, y, z0 - 1, z0 + P["bossH"] + 2, P["screwPilot"] if not P["captiveNuts"] else P["screwClear"] + 0.2))
+        if P["captiveNuts"]:
+            hexp = trimesh.creation.cylinder(radius=P["nutAF"] / 2 / np.cos(np.pi / 6), height=P["nutH"] + 1, sections=6); hexp.apply_translation([x, y, z0 + (P["nutH"] + 1) / 2 - 1]); boss = D(boss, hexp)
+        bosses.append(boss)
+    cowl = U(cowl, tongue, *bosses)
+    # logo deboss on the roof (AMS: swap to purple for layers 1-3 when printing roof-down)
     xs = [x for p in LOGO_POLYS for x, _ in p]; ys = [y for p in LOGO_POLYS for _, y in p]
     sc = P["logoW"] / (max(xs) - min(xs)); cx, cy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2
-    lc = (0.0, (yF + chF + yR - chR) / 2)
+    lc = (0.0, (yE + chF + yR - chR) / 2)
     logo = [ex(Polygon([(sc * (x - cx) + lc[0], -sc * (y - cy) + lc[1]) for x, y in p]), top - 0.6, top + 1) for p in LOGO_POLYS]
-    cowl = D(cowl, *logo)
-    parts["A_body"] = U(base, cowl)
+    parts["A2_cowl"] = D(cowl, *logo)
 
-    # ---- B bezel (flush frame, open at the sill) ----
-    bz = rrbox_y(mouthW + 2 * bzW, mouthH + bzW, mouthR + bzW, 0, z0 + (mouthH + bzW) / 2, yF, yF + 3)
-    bzi = rrbox_y(mouthW, mouthH + 1, mouthR, 0, z0 - 1 + (mouthH + 1) / 2, yF - 2, yF + 5)
-    parts["B_bezel"] = D(bz, bzi)
+    # ---- B bezel (optional): flush frame on the raked face ----
+    Rk = trimesh.transformations.rotation_matrix(-np.radians(P["rakeDeg"]), [1, 0, 0], point=[0, yF, z0])
+    if P["buildBezel"]:
+        bz = rrbox_y(mouthW + 2 * bzW, mouthH + bzW, mouthR + bzW, 0, z0 + (mouthH + bzW) / 2, yF, yF + 3)
+        bzi = rrbox_y(mouthW, mouthH + 1, mouthR, 0, z0 - 1 + (mouthH + 1) / 2, yF - 2, yF + 5)
+        bz = D(bz, bzi); bz.apply_transform(Rk); parts["B_bezel"] = bz
 
     # ---- S throat sleeve ----
     zTopS, zBotS = gTop + 1.5 - 0.2, stackBottom - bkT
     parts["S_throat_sleeve"] = D(ex(rrect(holeW, holeL, holeR), zBotS, zTopS), ex(rrect(cutW, cutL, cutR), zBotS - 2, zTopS + 2))
 
-    # ---- R rain cap (modelled 45 mm ahead of the mouth, like the FeatureScript) ----
-    ey = -45.0
-    capF = rrbox_y(mouthW + 2 * bzW, mouthH + bzW, mouthR + bzW, 0, z0 + (mouthH + bzW) / 2, yF + ey - 3, yF + ey)
-    plug = rrbox_y(mouthW - 0.6, mouthH - 0.6, max(mouthR - 0.3, 0.5), 0, z0 + mouthH / 2, yF + ey - 0.5, yF + ey + 15)
-    plug = D(plug, box(-mouthW / 2 + 3.3, yF + ey + 3, z0 + 3.3, mouthW / 2 - 3.3, yF + ey + 16, z0 + mouthH - 3.3))
-    bumps = [box(s * mouthW / 4 - 10, yF + ey + 9, z0 + mouthH - 0.4, s * mouthW / 4 + 10, yF + ey + 12, z0 + mouthH + 0.3) for s in (-1, 1)]
-    cap = U(capF, plug, *bumps)
-    parts["R_rain_cap"] = D(cap, box(-15, yF + ey - 4, z0 - 1, 15, yF + ey + 1, z0 + 4))
+    # ---- R rain cap: flange on the raked face, hollow plug into the mouth; shown exploded 45 mm ahead ----
+    capF = rrbox_y(mouthW + 2 * bzW, mouthH + bzW, mouthR + bzW, 0, z0 + (mouthH + bzW) / 2, yF - 3, yF)
+    plug = rrbox_y(mouthW - 0.6, mouthH - 0.6, max(mouthR - 0.3, 0.5), 0, z0 + mouthH / 2, yF - 0.5, yF + 15)
+    plug = D(plug, box(-mouthW / 2 + 3.3, yF + 3, z0 + 3.3, mouthW / 2 - 3.3, yF + 16, z0 + mouthH - 3.3))
+    bumps = [box(sgn * mouthW / 4 - 10, yF + 9, z0 + mouthH - 0.4, sgn * mouthW / 4 + 10, yF + 12, z0 + mouthH + 0.3) for sgn in (-1, 1)]
+    cap = D(U(capF, plug, *bumps), box(-15, yF - 4, z0 - 1, 15, yF + 1, z0 + 4))
+    cap.apply_transform(Rk); cap.apply_translation([0, -45, 0]); parts["R_rain_cap"] = cap
 
     # ---- C guide: U-bracket + flap + inboard cheek ----
     zPlateTop = stackBottom - bkT - 0.5; armHalfW = bx + 13; hy = holeL / 2 + 24
@@ -170,7 +203,7 @@ def build(P):
            box(-(holeW / 2) - 14, -1, tz0 - 2, -(holeW / 2) + 1, 1, tz0 + 4), box(holeW / 2 - 1, -1, tz0 - 2, holeW / 2 + 14, 1, tz0 + 4),
            box(-6, bF - 1, tz0 - 2, 6, bF + 8, tz0 + 4), cyl(-50, bR - 10, tz0 - 2, tz0 + 4, 3), cyl(50, bR - 10, tz0 - 2, tz0 + 4, 3)]
     parts["T_fit_check_template"] = D(tp, *tt)
-    derived = dict(mouthH=mouthH, mouth_area_cm2=(mouthW * mouthH - (4 - np.pi) * mouthR**2) / 100, throat_area_cm2=(cutW * cutL - (4 - np.pi) * cutR**2) / 100,
+    derived = dict(mouthH=mouthH, bossPos=bossPos, roof_front_edge_y=yE, mouth_area_cm2=(mouthW * mouthH - (4 - np.pi) * mouthR**2) / 100, throat_area_cm2=(cutW * cutL - (4 - np.pi) * cutR**2) / 100,
                    hood_cut=[holeW, holeL, holeR], stackBottom=stackBottom, bolts=bolts, nut_to_cowl_wall=bx - bodyW / 2)
     return parts, derived
 

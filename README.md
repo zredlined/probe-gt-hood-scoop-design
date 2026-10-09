@@ -1,6 +1,6 @@
 # Probe GT hood scoop — #42
 
-A bolt-on, 3D-printed fresh-air hood scoop for the 4OGS Ford Probe GT race car. It sits over a 199 x 75 mm opening cut in the hood ahead of the cone filter, feeds outside air down through a lined throat, and a short flap under the hood turns that air toward the filter. Black ASA body, purple accents, 4OGS wordmark on the roof.
+A bolt-on, 3D-printed fresh-air hood scoop for the 4OGS Ford Probe GT race car. It sits over a 199 x 75 mm opening cut in the hood ahead of the cone filter, feeds outside air down through a lined throat, and a short flap under the hood turns that air toward the filter. Black ASA, purple accents, 4OGS wordmark inlaid on the roof. Every part prints without supports.
 
 ![On the hood](docs/images/fig_on_car.png)
 
@@ -12,8 +12,9 @@ A bolt-on, 3D-printed fresh-air hood scoop for the 4OGS Ford Probe GT race car. 
 |---|---|
 | [`docs/BUILD_GUIDE.md`](docs/BUILD_GUIDE.md) | Step-by-step instructions with pictures. Start here. |
 | [`docs/BOM.md`](docs/BOM.md) | Parts, hardware and filament. Only four things to buy. |
-| [`docs/DESIGN.md`](docs/DESIGN.md) | How the design works, the coordinate frame, every parameter, and the decisions behind it. |
-| [`validation/`](validation/validation_report.md) | What was checked against the scan and how the parts print. |
+| [`docs/DESIGN.md`](docs/DESIGN.md) | How the design works, the coordinate frame, every parameter. |
+| [`docs/DECISIONS.md`](docs/DECISIONS.md) | Why it is the way it is, newest first. |
+| [`validation/`](validation/README.md) | What was checked against the scan and how the parts print. |
 | [`stl/`](stl) | Printable parts, ready to slice. Local frame, millimetres. |
 | [`step/`](step) | STEP export of the whole system for other CAD. |
 | [`cad/`](cad) | Onshape FeatureScript (design master), the Python mirror that rebuilds the STLs without Onshape, and the validation and figure scripts. |
@@ -26,18 +27,18 @@ A bolt-on, 3D-printed fresh-air hood scoop for the 4OGS Ford Probe GT race car. 
 | Part | Material | Print | What it does |
 |---|---|---|---|
 | T  template | PLA | flat | Transfers the opening and the 8 bolt holes to the hood. Print this first. |
-| A  body | black ASA | roof down | Flange that matches the hood curve plus the slab cowl and mouth. One piece. |
-| B  bezel | purple ASA | on its back | Flush frame around the mouth. |
+| A1 flange plate | black ASA | top face down | Matches the hood curve, carries the 8 M6 bolts, locates the cowl. |
+| A2 cowl | black ASA (+ purple logo) | roof down | The slab with the raked mouth. Screws to the plate on the bench with 6 M4. |
 | S  throat sleeve | purple ASA | standing | Lines the cut through both hood skins. |
 | R  rain cap | purple ASA | flange down | Snap-in blank for rain or storage. |
 | C  guide | purple ASA | bracket down | U-bracket plus 45° flap under the hood, aims air at the cone. |
 | D  strips | 25 x 3 aluminium flat bar | cut and drill | Load-spreading backing for the 8 bolts. |
 
-Hardware: 8 x M6x50, nylocs, washers, Ø10 tube for limiters and spacers, 2 mm foam gasket tape.
+Hardware: 8 x M6x50, 6 x M4 self-tapping, nylocs, washers, Ø10 tube for limiters and spacers, 2 mm foam gasket tape.
 
 ## CAD
 
-Design master: [Onshape document](https://cad.onshape.com/documents/b03b5bf08a93c5df66f722d9/w/0932d1534808bff872171f8f/e/94d73fdd94bb229f0805fb39) (custom feature "Probe hood scoop system" in the "Probe scoop FeatureScript" tab; every dimension is a parameter). The scan meshes are in the same document, so the scoop can be viewed on the car.
+Design master: [Onshape document](https://cad.onshape.com/documents/b03b5bf08a93c5df66f722d9/w/0932d1534808bff872171f8f) (custom feature "Probe hood scoop system" in the "Probe scoop FeatureScript" tab; every dimension is a parameter). The scan meshes are in the same document in the scan frame, and the assembly "Scoop on car" shows the scoop on the hood.
 
 To rebuild the STLs without Onshape:
 

@@ -1,7 +1,7 @@
-"""Scan-based design validation for the Probe hood scoop.
+"""Scan-based design validation for the Probe hood scoop (Rev E).
 Checks: flange-to-skin fit, under-hood clearance of every part/hardware item vs the engine-bay scan, cone placeholder clearance,
 inner-panel gap at each bolt (provisional underside scan), flow areas, print-orientation overhang fractions, filament estimates.
-Usage: python3 cad/validate.py [stl_dir] [out_dir]   (defaults: stl/ and validation/)"""
+Writes 07_build_package/validation_report.md + .json"""
 import numpy as np, trimesh, json, glob, os
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__))) + "/"
 R = ROOT + "reference/"
@@ -40,14 +40,14 @@ def part(prefix):
     return None, None
 
 # 1) flange underside vs outer skin --------------------------------------------------------------
-kA, body = part("A_body")
+kA, body = part("A1_")
 pts, _ = trimesh.sample.sample_surface(body, 40000)
 fl = pts[(pts[:, 2] < P["gk"] + 0.3) & (pts[:, 2] > P["gk"] - 8)]           # flange underside region (local z around gasket top, sag down to -5)
 inside = (np.abs(fl[:, 0]) > P["bodyW"] / 2 - 5) | (np.abs(fl[:, 1] - (P["yF"] + P["yR"]) / 2) > (P["yR"] - P["yF"]) / 2 - 5)
 fl = fl[inside]
 _, d_h, _ = pq_hood.on_surface(to_global(fl))
 # signed: positive = flange above skin
-rep["checks"]["flange_fit"] = {"n_samples": int(len(fl)), "distance_to_scan_skin_mm": {"min": round(float(d_h.min()), 2), "median": round(float(np.median(d_h)), 2), "p95": round(float(np.percentile(d_h, 95)), 2), "max": round(float(d_h.max()), 2)}, "design_gasket_gap_mm": P["gk"]}
+rep["checks"]["flange_fit"] = {"part": kA, "n_samples": int(len(fl)), "distance_to_scan_skin_mm": {"min": round(float(d_h.min()), 2), "median": round(float(np.median(d_h)), 2), "p95": round(float(np.percentile(d_h, 95)), 2), "max": round(float(d_h.max()), 2)}, "design_gasket_gap_mm": P["gk"]}
 lines += ["## 1. Flange underside vs outer skin (scan)", f"- {len(fl)} sampled points on the flange underside. Distance to the scanned skin: min {d_h.min():.2f}, median {np.median(d_h):.2f}, p95 {np.percentile(d_h,95):.2f}, max {d_h.max():.2f} mm. Design gasket gap is {P['gk']} mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.", ""]
 
 # 2) under-hood clearance to engine-bay scan ---------------------------------------------------------
@@ -107,7 +107,7 @@ lines += ["## 5. Flow areas (geometry only, no CFD)", f"- Mouth clear {P['mouthW
 # 6) print-orientation overhang check -----------------------------------------------------------------------
 def Rx(deg):
     t = np.radians(deg); return np.array([[1, 0, 0], [0, np.cos(t), -np.sin(t)], [0, np.sin(t), np.cos(t)]])
-orient = {"A_body": ("roof-down (flat top on the bed)", Rx(180)), "B_": ("lying on its back (rear face down)", Rx(-90)), "R_": ("flange face down, plug up", Rx(90)),
+orient = {"A1_": ("top face down (curved underside up)", Rx(180)), "A2_": ("roof down", Rx(180)), "B_": ("lying on its back (rear face down)", Rx(-90)), "R_": ("flange face down, plug up", Rx(90 + _p("rakeDeg", 20))),
           "S_": ("standing upright (as modelled)", np.eye(3)), "C_": ("bracket face down, flap rising at 45°", Rx(180)), "T_": ("flat (as modelled)", np.eye(3))}
 ov = []
 for pref, (desc, Rot) in orient.items():
@@ -123,7 +123,7 @@ for pref, (desc, Rot) in orient.items():
 rep["checks"]["print_orientation"] = ov
 lines += ["## 6. Print orientation / overhang check (faces steeper than 45° facing down, excluding the bed face)", "| part | orientation | overhang area cm² | % of surface | volume cm³ | est. g (ASA, 4 walls, ~40% infill) | bbox in print orientation |", "|---|---|---|---|---|---|---|"]
 for o in ov: lines.append(f"| {o['part']} | {o['orientation']} | {o['overhang_area_cm2']} | {o['overhang_pct_of_surface']} | {o['volume_cm3']} | {o['est_grams_ASA']:.0f} | {o['bbox_mm']} |")
-lines += ["", "Body roof-down: the only overhang is the underside of the 17–20 mm flange ring at 60+ mm height — enable tree supports touching that ring only (paint-on support or a support blocker over the cavity). Everything else prints support-free in the listed orientation.", ""]
+lines += ["", "All parts print support-free in the listed orientation; the only faces counted are the 45° boss cones and the 45° flap, which print cleanly.", ""]
 # 7) tool access -------------------------------------------------------------------------------------------
 sock_r = 17 / 2   # 3/8"-drive 10 mm socket OD ~17
 ta = {"nut_centre_to_cowl_side_wall_mm": round(P["bx"] - P["bodyW"] / 2, 1), "nut_centre_to_cowl_front_face_mm": round(abs(P["yf"]) - abs(P["yF"]), 1), "nut_centre_to_cowl_rear_face_mm": round(P["yr"] - P["yR"], 1),
