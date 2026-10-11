@@ -46,3 +46,17 @@ Drills 3, 6.5 and 10.5 mm (or a step drill), Ø24 hole saw or step drill for the
 
 ## Bolt stack
 Head below the strip, nut on top. From the bottom: button head 3.3 → strip 3 → spacer tube (measured, through a Ø10.5 hole in the inner panel) → washer 1.6 → outer skin 0.8 → gasket 1.5 compressed → plate 8 with a steel limiter tube inside → washer 1.6 → nyloc 6. At the scan's 21 mm gap that is 42.7 mm head-to-nut, leaving about 7 mm of M6x50 above the nut. If a measured depth exceeds about 32 mm, that hole needs an M6x60.
+
+## Shopping checklist (US sources)
+
+Already on hand: 8 x M6x50 button head, 6 x M4 self-tapping, black ASA.
+
+- [ ] **Aluminium flat bar 1" x 1/8"** (25.4 x 3.2 mm), one 3 ft length. Any hardware store carries it; online: [LED Supply](https://www.ledsupply.com/led-heatsinks/aluminum-flat-bar) or [Remington Industries](https://www.remingtonindustries.com/raw-metals/aluminum-flat-bar-1-8-x-1-6061-general-purpose-plate-10-lengths-available-t6511-mill-stock-extruded-0-125-thick/).
+- [ ] **Aluminium tube 3/8" OD x 0.049" wall** (ID 0.277" = 7.0 mm, clears M6), 1 to 2 ft. Hobby-shop K&S tube is this size; online: [Speedy Metals](https://speedymetals.com/p-4554-38-od-x-0049-wall-tube-6061-t6-aluminum.aspx) or [Online Metals](https://www.onlinemetals.com/en/buy/aluminum-round-tube-6061). Steel brake-line stock of the same OD also works.
+- [ ] **Closed-cell foam weatherstrip tape, 1/16" or 3/32" thick x 1" wide**, adhesive backed, 10 ft roll. Hardware-store EPDM/neoprene weatherstrip is fine; McMaster's [EPDM-blend foam strips](https://www.mcmaster.com/products/strips/material~epdm-neoprene-sbr-foam) if ordering there.
+- [ ] **M6 nylon-insert lock nuts, 8** (DIN 985 / ISO 10511), zinc: [Fastener Superstore](https://www.fastenersuperstore.com/products/627689/nylon-insert-locknuts) or [McMaster](https://www.mcmaster.com/products/locknuts/specifications-met~iso-10511/). Skip if you have a bin of them.
+- [ ] **M6 flat washers, 16.**
+- [ ] **M6 acorn nuts, 8** (optional, covers the proud thread).
+- [ ] **Purple ASA, 1 kg** (optional, for cap, guide and the logo inlay): Polymaker PolyLite ASA Purple or SUNLU ASA Purple; both are AMS-compatible. Search the exact names on Amazon; reference listings: [Polymaker](https://www.3djake.ch/en-CH/polymaker/polylite-asa-purple), [SUNLU](https://www.3djake.com/sunlu/asa-purple). Bambu does not sell a purple ASA.
+- [ ] **Black RTV silicone** (sleeve seal), **rust primer or touch-up paint**, **masking tape**, **modelling clay** (clearance test).
+- [ ] Tools to check: a **step drill to 1/2"** (for the 10.5 mm inner-panel holes and the 6.5 mm skin holes), a **15/16" or 1" hole saw** or step drill to 1" for the R12 corners, a fine metal jigsaw blade, a 10 mm socket, a torque wrench that reads 6 N·m.
