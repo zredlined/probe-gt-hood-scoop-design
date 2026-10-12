@@ -143,7 +143,7 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
         annotation { "Group Name" : "Cowl-to-plate screws (bench joint)", "Collapsed By Default" : true }
         {
             annotation { "Name" : "Boss diameter" } isLength(definition.bossD, { (millimeter) : [6, 10, 16] } as LengthBoundSpec);
-            annotation { "Name" : "Boss height" } isLength(definition.bossH, { (millimeter) : [5, 9, 20] } as LengthBoundSpec);
+            annotation { "Name" : "Screw bore depth into boss" } isLength(definition.bossH, { (millimeter) : [5, 9, 20] } as LengthBoundSpec);
             annotation { "Name" : "Self-tapping pilot (M4 = 3.4)" } isLength(definition.screwPilot, { (millimeter) : [2, 3.4, 5] } as LengthBoundSpec);
             annotation { "Name" : "Clearance hole in plate (M4 = 4.3)" } isLength(definition.screwClear, { (millimeter) : [2.5, 4.3, 6.5] } as LengthBoundSpec);
             annotation { "Name" : "Captive nyloc pockets instead of self-tapping", "Default" : false } definition.captiveNuts is boolean;
@@ -277,10 +277,8 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
             for (var i = 0; i < size(bossPos); i += 1)
             {
                 const x = bossPos[i][0]; const y = bossPos[i][1];
-                var bo = cylZ(context, id + ("boss" ~ i), x, y, z0, z0 + bossH, bossD);
-                fCone(context, id + ("bcone" ~ i), { "topCenter" : vector(x, y, z0 + bossH + bossD / 2) * mm, "bottomCenter" : vector(x, y, z0 + bossH) * mm, "topRadius" : 0.01 * mm, "bottomRadius" : bossD / 2 * mm });
-                bo = unite(context, id + ("bossU" ~ i), [bo, qCreatedBy(id + ("bcone" ~ i), EntityType.BODY)]);
-                var btools = [cylZ(context, id + ("bore" ~ i), x, y, z0 - 1, z0 + bossH + 2, definition.captiveNuts ? scl + 0.2 : pil)];
+                var bo = cylZ(context, id + ("boss" ~ i), x, y, z0, top - w + 0.5, bossD);          // full-height column roof→skirt: no overhang roof-down, stiffens the roof
+                var btools = [cylZ(context, id + ("bore" ~ i), x, y, z0 - 1, z0 + bossH + 3, definition.captiveNuts ? scl + 0.2 : pil)];
                 if (definition.captiveNuts)
                 {
                     var hsk = newSketchOnPlane(context, id + ("hexSk" ~ i), { "sketchPlane" : plane(vector(0, 0, z0 - 1) * mm, vector(0, 0, 1), vector(1, 0, 0)) });

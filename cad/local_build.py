@@ -142,9 +142,8 @@ def build(P):
     # bosses with 45° tops, pilot bores (self-tapping M4) or captive nyloc pockets
     bosses = []
     for x, y in bossPos:
-        bcyl = cyl(x, y, z0, z0 + P["bossH"], P["bossD"]); bc = trimesh.creation.cone(radius=P["bossD"] / 2, height=P["bossD"] / 2, sections=48); bc.apply_translation([x, y, z0 + P["bossH"]])
-        boss = U(bcyl, bc)
-        boss = D(boss, cyl(x, y, z0 - 1, z0 + P["bossH"] + 2, P["screwPilot"] if not P["captiveNuts"] else P["screwClear"] + 0.2))
+        boss = cyl(x, y, z0, top - w + 0.5, P["bossD"])   # full-height column, roof to skirt: prints with no overhang roof-down and stiffens the roof
+        boss = D(boss, cyl(x, y, z0 - 1, z0 + P["bossH"] + 3, P["screwPilot"] if not P["captiveNuts"] else P["screwClear"] + 0.2))
         if P["captiveNuts"]:
             hexp = trimesh.creation.cylinder(radius=P["nutAF"] / 2 / np.cos(np.pi / 6), height=P["nutH"] + 1, sections=6); hexp.apply_translation([x, y, z0 + (P["nutH"] + 1) / 2 - 1]); boss = D(boss, hexp)
         bosses.append(boss)

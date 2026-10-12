@@ -10,12 +10,12 @@
  "checks": {
   "flange_fit": {
    "part": "A1_flange_plate.stl",
-   "n_samples": 12948,
+   "n_samples": 12941,
    "distance_to_scan_skin_mm": {
     "min": 0.0,
-    "median": 1.59,
-    "p95": 3.46,
-    "max": 6.6
+    "median": 1.58,
+    "p95": 3.49,
+    "max": 6.43
    },
    "design_gasket_gap_mm": 1.5
   },
@@ -36,43 +36,43 @@
    },
    {
     "part": "guide U-bracket + flap",
-    "min_mm": 12.1,
+    "min_mm": 11.5,
     "at_scan_xyz": [
-     214.0,
-     -353.0,
-     69.0
+     212.0,
+     -357.0,
+     68.0
     ],
     "at_local_xyz": [
-     105.0,
-     -17.0,
+     103.0,
+     -22.0,
      -31.0
     ]
    },
    {
     "part": "bolt heads (head-down, under strips)",
-    "min_mm": 10.5,
+    "min_mm": 10.6,
     "at_scan_xyz": [
-     217.0,
-     -342.0,
+     218.0,
+     -343.0,
      67.0
     ],
     "at_local_xyz": [
-     108.0,
+     109.0,
      -8.0,
      -34.0
     ]
    },
    {
     "part": "backing strips",
-    "min_mm": 11.1,
+    "min_mm": 11.2,
     "at_scan_xyz": [
      209.0,
-     -383.0,
+     -381.0,
      68.0
     ],
     "at_local_xyz": [
      100.0,
-     -47.0,
+     -46.0,
      -27.0
     ]
    }
@@ -80,11 +80,11 @@
   "cone_placeholder": [
    {
     "part": "guide U-bracket + flap",
-    "min_gap_to_cone_placeholder_mm": 51.2
+    "min_gap_to_cone_placeholder_mm": 50.7
    },
    {
     "part": "throat sleeve",
-    "min_gap_to_cone_placeholder_mm": 103.5
+    "min_gap_to_cone_placeholder_mm": 103.1
    }
   ],
   "inner_panel_depth_below_skin_mm_PROVISIONAL": {
@@ -118,16 +118,16 @@
     ]
    },
    {
-    "part": "A2_cowl.stl",
+    "part": "A2_logo_inlay.stl",
     "orientation": "roof down",
-    "overhang_area_cm2": 39.4,
-    "overhang_pct_of_surface": 4.0,
-    "volume_cm3": 141.5,
-    "est_grams_ASA": 94.0,
+    "overhang_area_cm2": 0.0,
+    "overhang_pct_of_surface": 0.0,
+    "volume_cm3": 1.1,
+    "est_grams_ASA": 1.0,
     "bbox_mm": [
-     196.0,
-     125.0,
-     66.0
+     91.7,
+     33.7,
+     0.6
     ]
    },
    {

@@ -3,21 +3,21 @@
 Site: scan X 110, Y -340, skin Z 104.2 (label-neighbourhood estimate). All clearances come from the scan meshes; the cone is a placeholder; the hood underside registration is PROVISIONAL.
 
 ## 1. Flange underside vs outer skin (scan)
-- 12948 sampled points on the flange underside. Distance to the scanned skin: min 0.00, median 1.59, p95 3.46, max 6.60 mm. Design gasket gap is 1.5 mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.
+- 12941 sampled points on the flange underside. Distance to the scanned skin: min 0.00, median 1.58, p95 3.49, max 6.43 mm. Design gasket gap is 1.5 mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.
 
 ## 2. Under-hood clearance to the engine-bay scan
 | item | min clearance (mm) | where (scan XYZ) |
 |---|---|---|
 | throat sleeve | 12.1 | [199.0, -372.0, 70.0] |
-| guide U-bracket + flap | 12.1 | [214.0, -353.0, 69.0] |
-| bolt heads (head-down, under strips) | 10.5 | [217.0, -342.0, 67.0] |
-| backing strips | 11.1 | [209.0, -383.0, 68.0] |
+| guide U-bracket + flap | 11.5 | [212.0, -357.0, 68.0] |
+| bolt heads (head-down, under strips) | 10.6 | [218.0, -343.0, 67.0] |
+| backing strips | 11.2 | [209.0, -381.0, 68.0] |
 
 Anything under ~15 mm needs a physical check; the scan lacks the cone and may miss hoses/wiring. Hood closing sweep is not simulated.
 
 ## 3. Cone placeholder (D150, from scan void + photo; NOT scanned)
-- guide U-bracket + flap: min gap 51.2 mm (positive = clear)
-- throat sleeve: min gap 103.5 mm (positive = clear)
+- guide U-bracket + flap: min gap 50.7 mm (positive = clear)
+- throat sleeve: min gap 103.1 mm (positive = clear)
 
 The brief's starting target is a 25–50 mm outlet-to-filter gap. Set the flap reach/angle after measuring the real cone.
 
@@ -44,7 +44,7 @@ Design value is 21 mm. The tube passes through a Ø10.5 hole in the inner panel 
 | part | orientation | overhang area cm² | % of surface | volume cm³ | est. g (ASA, 4 walls, ~40% infill) | bbox in print orientation |
 |---|---|---|---|---|---|---|
 | A1_flange_plate.stl | top face down (curved underside up) | 14.9 | 1.9 | 293.1 | 194 | [244.0, 181.0, 12.8] |
-| A2_cowl.stl | roof down | 39.4 | 4.0 | 141.5 | 94 | [196.0, 125.0, 66.0] |
+| A2_logo_inlay.stl | roof down | 0.0 | 0.0 | 1.1 | 1 | [91.7, 33.7, 0.6] |
 | R_rain_cap.stl | flange face down, plug up | 1.4 | 0.4 | 82.2 | 55 | [196.0, 60.5, 18.0] |
 | S_throat_sleeve.stl | standing upright (as modelled) | 0.0 | 0.0 | 31.2 | 21 | [199.0, 75.0, 29.9] |
 | C_guide_flap.stl | bracket face down, flap rising at 45° | 136.3 | 30.7 | 62.3 | 41 | [250.0, 121.0, 59.2] |
