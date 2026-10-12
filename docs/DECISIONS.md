@@ -12,7 +12,7 @@ Why the design is the way it is. Newest first. Each entry is the decision, the r
 
 **Two-piece body, joined on the bench.** A flange plate printed top-face-down and a cowl printed roof-down, both with zero supports. Six M4 screws go up through countersunk holes in the plate into bosses inside the cowl skirt, with a tongue-and-groove to locate them. Replaces the one-piece body, which needed a full ring of support under the flange at 60 mm and put support scars on the visible nut face. Also fixes a gap in the earlier two-piece attempt, which had no fastener between cowl and base. Self-tapping M4 is the default; a parameter switches the bosses to captive M4 nyloc pockets.
 
-**Mouth face raked 20°.** The front face leans back instead of standing vertical. Less bluff, throws rain down rather than into the throat, and it is the most recognisable 90s scoop cue (WRX, Evo, GTi-R all had raked boxes). Roof raised 72 → 76 to keep the mouth above 100 cm² (now 176 x 57.5, 101 cm²).
+**Mouth face raked 20°.** The front face leans back instead of standing vertical. Less bluff, throws rain down rather than into the throat, and it is the most recognisable 90s scoop cue (WRX, Evo, GTi-R all had raked boxes). Roof raised 72 → 74 to keep the mouth above 100 cm² (186 x 55.5, 103 cm² at the time; see the print fixes above for the current numbers).
 
 **AMS for the logo, not the bezel.** The 4OGS deboss on the roof becomes a purple inlay with three filament swaps in the first layers, which costs almost nothing. A full-height purple bezel would swap on every layer and purge 150–300 g of filament for a 3 g feature, so the bezel is now an optional separate part, off by default.
 

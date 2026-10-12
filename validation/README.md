@@ -10,7 +10,7 @@
 | Inner-panel depth at the 8 bolt sites (provisional scan) | 12 to 38 mm; design value 21; measure at pilot holes |
 | Mouth area | 101 cm² (smallest section) |
 | Tool access | 10 mm socket clears the cowl at all 8 nuts by 3.5 mm or more; heads reachable with the hood open; M4 joint done on the bench |
-| Printability | all parts watertight; no supports in the listed orientations (only 45° faces: boss cones, flap, countersinks) |
+| Printability | all parts watertight; no supports in the listed orientations (only 45° faces: chamfers, flap, countersinks; the cowl's screw columns are clipped inside the body) |
 | Local mirror vs Onshape export | surfaces agree within 0.13 mm |
 
 Not checked: hood-closing sweep, airflow, hot-soak strength, anything the scan does not contain (the cone, loose hoses and wiring).
