@@ -123,7 +123,7 @@ for pref, (desc, Rot) in orient.items():
 rep["checks"]["print_orientation"] = ov
 lines += ["## 6. Print orientation / overhang check (faces steeper than 45° facing down, excluding the bed face)", "| part | orientation | overhang area cm² | % of surface | volume cm³ | est. g (ASA, 4 walls, ~40% infill) | bbox in print orientation |", "|---|---|---|---|---|---|---|"]
 for o in ov: lines.append(f"| {o['part']} | {o['orientation']} | {o['overhang_area_cm2']} | {o['overhang_pct_of_surface']} | {o['volume_cm3']} | {o['est_grams_ASA']:.0f} | {o['bbox_mm']} |")
-lines += ["", "All parts print support-free in the listed orientation; the only faces counted are the 45° countersinks in the plate and the 45° flap, which print cleanly. The cowl's screw bosses are full-height columns and add no overhang.", ""]
+lines += ["", "All parts print support-free in the listed orientation; the only faces counted sit exactly at 45°: the plate countersinks, the cowl's brow and tail chamfers, and the guide flap. All print cleanly. The cowl's screw bosses are full-height columns and add no overhang.", ""]
 # 7) tool access -------------------------------------------------------------------------------------------
 sock_r = 17 / 2   # 3/8"-drive 10 mm socket OD ~17
 ta = {"nut_centre_to_cowl_side_wall_mm": round(P["bx"] - P["bodyW"] / 2, 1), "nut_centre_to_cowl_front_face_mm": round(abs(P["yf"]) - abs(P["yF"]), 1), "nut_centre_to_cowl_rear_face_mm": round(P["yr"] - P["yR"], 1),
