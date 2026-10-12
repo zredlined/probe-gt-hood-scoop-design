@@ -16,7 +16,7 @@ Depths marked **measure** are confirmed in Round 1 of the build guide before any
 
 Totals: black ASA about 245 g, purple ASA about 120 g, PLA about 40 g. Estimates, allow 25 %. Nothing needs supports.
 
-**Logo inlay with the AMS:** the cowl prints roof-down, so the 0.6 mm 4OGS deboss is in layers 1–3. Assign those layers (or a modifier on the deboss) to purple. Three swaps total. Do not multi-colour anything taller; a full-height purple bezel would purge more filament than the whole part weighs.
+**Logo inlay with the AMS:** the roof has a 0.6 mm recess in the shape of the wordmark, and `stl/A2_logo_inlay.stl` is the matching 0.6 mm plug. In Bambu Studio import `A2_cowl.stl` and `A2_logo_inlay.stl` together and answer **yes** to loading them as one object with multiple parts, then assign the inlay part to purple. The cowl prints roof-down, so the inlay is layers 1–3 and costs three filament swaps. Without purple, print the cowl alone and the logo stays a crisp recess. Do not multi-colour anything taller; a full-height purple bezel would purge more filament than the whole part weighs.
 
 ### Why these materials
 - **ASA** for every part on or under the hood. The skin reaches 70–90 °C in sun with a hot engine; ASA stays stiff to about 95 °C and does not chalk in UV. Door closed, nozzle 260–270 °C, bed 90–100 °C, aux fan off, part fan low, dry filament, glue stick on the textured plate, 5 mm brim on the plate.

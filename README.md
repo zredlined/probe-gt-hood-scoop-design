@@ -28,7 +28,7 @@ A bolt-on, 3D-printed fresh-air hood scoop for the 4OGS Ford Probe GT race car. 
 |---|---|---|---|
 | T  template | PLA | flat | Transfers the opening and the 8 bolt holes to the hood. Print this first. |
 | A1 flange plate | black ASA | top face down | Matches the hood curve, carries the 8 M6 bolts, locates the cowl. |
-| A2 cowl | black ASA (+ purple logo) | roof down | The slab with the raked mouth. Screws to the plate on the bench with 6 M4. |
+| A2 cowl (+ `A2_logo_inlay`) | black ASA, purple inlay | roof down | The slab with the raked mouth. Screws to the plate on the bench with 6 M4. |
 | S  throat sleeve | purple ASA | standing | Lines the cut through both hood skins. |
 | R  rain cap | purple ASA | flange down | Snap-in blank for rain or storage. |
 | C  guide | purple ASA | bracket down | U-bracket plus 45° flap under the hood, aims air at the cone. |
