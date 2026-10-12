@@ -10,12 +10,12 @@
  "checks": {
   "flange_fit": {
    "part": "A1_flange_plate.stl",
-   "n_samples": 12941,
+   "n_samples": 12656,
    "distance_to_scan_skin_mm": {
-    "min": 0.0,
-    "median": 1.58,
-    "p95": 3.49,
-    "max": 6.43
+    "min": 0.01,
+    "median": 1.59,
+    "p95": 3.51,
+    "max": 6.55
    },
    "design_gasket_gap_mm": 1.5
   },
@@ -24,33 +24,33 @@
     "part": "throat sleeve",
     "min_mm": 12.1,
     "at_scan_xyz": [
-     199.0,
+     198.0,
      -372.0,
      70.0
     ],
     "at_local_xyz": [
-     90.0,
+     89.0,
      -37.0,
      -27.0
     ]
    },
    {
     "part": "guide U-bracket + flap",
-    "min_mm": 11.5,
+    "min_mm": 11.8,
     "at_scan_xyz": [
-     212.0,
-     -357.0,
+     215.0,
+     -356.0,
      68.0
     ],
     "at_local_xyz": [
-     103.0,
-     -22.0,
+     106.0,
+     -21.0,
      -31.0
     ]
    },
    {
     "part": "bolt heads (head-down, under strips)",
-    "min_mm": 10.6,
+    "min_mm": 10.5,
     "at_scan_xyz": [
      218.0,
      -343.0,
@@ -64,15 +64,15 @@
    },
    {
     "part": "backing strips",
-    "min_mm": 11.2,
+    "min_mm": 11.0,
     "at_scan_xyz": [
      209.0,
-     -381.0,
+     -384.0,
      68.0
     ],
     "at_local_xyz": [
      100.0,
-     -46.0,
+     -48.0,
      -27.0
     ]
    }
@@ -80,11 +80,11 @@
   "cone_placeholder": [
    {
     "part": "guide U-bracket + flap",
-    "min_gap_to_cone_placeholder_mm": 50.7
+    "min_gap_to_cone_placeholder_mm": 51.2
    },
    {
     "part": "throat sleeve",
-    "min_gap_to_cone_placeholder_mm": 103.1
+    "min_gap_to_cone_placeholder_mm": 103.2
    }
   ],
   "inner_panel_depth_below_skin_mm_PROVISIONAL": {
@@ -118,8 +118,21 @@
     ]
    },
    {
-    "part": "A2_logo_inlay.stl",
+    "part": "A2_cowl.stl",
     "orientation": "roof down",
+    "overhang_area_cm2": 38.9,
+    "overhang_pct_of_surface": 3.8,
+    "volume_cm3": 163.3,
+    "est_grams_ASA": 108.0,
+    "bbox_mm": [
+     196.0,
+     125.0,
+     66.0
+    ]
+   },
+   {
+    "part": "A2_logo_inlay.stl",
+    "orientation": "roof down, as part of the cowl",
     "overhang_area_cm2": 0.0,
     "overhang_pct_of_surface": 0.0,
     "volume_cm3": 1.1,

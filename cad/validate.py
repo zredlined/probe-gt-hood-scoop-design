@@ -40,7 +40,7 @@ def part(prefix):
     return None, None
 
 # 1) flange underside vs outer skin --------------------------------------------------------------
-kA, body = part("A1_")
+kA, body = part("A1_flange")
 pts, _ = trimesh.sample.sample_surface(body, 40000)
 fl = pts[(pts[:, 2] < P["gk"] + 0.3) & (pts[:, 2] > P["gk"] - 8)]           # flange underside region (local z around gasket top, sag down to -5)
 inside = (np.abs(fl[:, 0]) > P["bodyW"] / 2 - 5) | (np.abs(fl[:, 1] - (P["yF"] + P["yR"]) / 2) > (P["yR"] - P["yF"]) / 2 - 5)
@@ -107,7 +107,7 @@ lines += ["## 5. Flow areas (geometry only, no CFD)", f"- Mouth clear {P['mouthW
 # 6) print-orientation overhang check -----------------------------------------------------------------------
 def Rx(deg):
     t = np.radians(deg); return np.array([[1, 0, 0], [0, np.cos(t), -np.sin(t)], [0, np.sin(t), np.cos(t)]])
-orient = {"A1_": ("top face down (curved underside up)", Rx(180)), "A2_": ("roof down", Rx(180)), "B_": ("lying on its back (rear face down)", Rx(-90)), "R_": ("flange face down, plug up", Rx(90 + _p("rakeDeg", 20))),
+orient = {"A1_": ("top face down (curved underside up)", Rx(180)), "A2_cowl": ("roof down", Rx(180)), "A2_logo": ("roof down, as part of the cowl", Rx(180)), "B_": ("lying on its back (rear face down)", Rx(-90)), "R_": ("flange face down, plug up", Rx(90 + _p("rakeDeg", 20))),
           "S_": ("standing upright (as modelled)", np.eye(3)), "C_": ("bracket face down, flap rising at 45°", Rx(180)), "T_": ("flat (as modelled)", np.eye(3))}
 ov = []
 for pref, (desc, Rot) in orient.items():
@@ -123,7 +123,7 @@ for pref, (desc, Rot) in orient.items():
 rep["checks"]["print_orientation"] = ov
 lines += ["## 6. Print orientation / overhang check (faces steeper than 45° facing down, excluding the bed face)", "| part | orientation | overhang area cm² | % of surface | volume cm³ | est. g (ASA, 4 walls, ~40% infill) | bbox in print orientation |", "|---|---|---|---|---|---|---|"]
 for o in ov: lines.append(f"| {o['part']} | {o['orientation']} | {o['overhang_area_cm2']} | {o['overhang_pct_of_surface']} | {o['volume_cm3']} | {o['est_grams_ASA']:.0f} | {o['bbox_mm']} |")
-lines += ["", "All parts print support-free in the listed orientation; the only faces counted are the 45° boss cones and the 45° flap, which print cleanly.", ""]
+lines += ["", "All parts print support-free in the listed orientation; the only faces counted are the 45° countersinks in the plate and the 45° flap, which print cleanly. The cowl's screw bosses are full-height columns and add no overhang.", ""]
 # 7) tool access -------------------------------------------------------------------------------------------
 sock_r = 17 / 2   # 3/8"-drive 10 mm socket OD ~17
 ta = {"nut_centre_to_cowl_side_wall_mm": round(P["bx"] - P["bodyW"] / 2, 1), "nut_centre_to_cowl_front_face_mm": round(abs(P["yf"]) - abs(P["yF"]), 1), "nut_centre_to_cowl_rear_face_mm": round(P["yr"] - P["yR"], 1),
