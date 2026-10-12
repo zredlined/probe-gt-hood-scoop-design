@@ -3,21 +3,21 @@
 Site: scan X 110, Y -340, skin Z 104.2 (label-neighbourhood estimate). All clearances come from the scan meshes; the cone is a placeholder; the hood underside registration is PROVISIONAL.
 
 ## 1. Flange underside vs outer skin (scan)
-- 12889 sampled points on the flange underside. Distance to the scanned skin: min 0.01, median 1.58, p95 3.51, max 6.42 mm. Design gasket gap is 1.5 mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.
+- 12878 sampled points on the flange underside. Distance to the scanned skin: min 0.00, median 1.59, p95 3.56, max 6.62 mm. Design gasket gap is 1.5 mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.
 
 ## 2. Under-hood clearance to the engine-bay scan
 | item | min clearance (mm) | where (scan XYZ) |
 |---|---|---|
-| throat sleeve | 12.2 | [200.0, -372.0, 70.0] |
-| guide U-bracket + flap | 11.6 | [212.0, -356.0, 68.0] |
-| bolt heads (head-down, under strips) | 10.6 | [217.0, -342.0, 67.0] |
-| backing strips | 11.1 | [209.0, -386.0, 67.0] |
+| throat sleeve | 12.2 | [192.0, -373.0, 70.0] |
+| guide U-bracket + flap | 11.6 | [214.0, -357.0, 68.0] |
+| bolt heads (head-down, under strips) | 10.6 | [219.0, -343.0, 67.0] |
+| backing strips | 11.1 | [209.0, -384.0, 68.0] |
 
 Anything under ~15 mm needs a physical check; the scan lacks the cone and may miss hoses/wiring. Hood closing sweep is not simulated.
 
 ## 3. Cone placeholder (D150, from scan void + photo; NOT scanned)
-- guide U-bracket + flap: min gap 51.3 mm (positive = clear)
-- throat sleeve: min gap 103.1 mm (positive = clear)
+- guide U-bracket + flap: min gap 51.6 mm (positive = clear)
+- throat sleeve: min gap 103.6 mm (positive = clear)
 
 The brief's starting target is a 25–50 mm outlet-to-filter gap. Set the flap reach/angle after measuring the real cone.
 
@@ -36,17 +36,17 @@ The brief's starting target is a 25–50 mm outlet-to-filter gap. Set the flap r
 Design value is 21 mm. The tube passes through a Ø10.5 hole in the inner panel and bears on a washer against the outer skin, so the inner panel is never clamped; cut each tube to its own measured length after the pilot holes. Depths over ~34 mm exceed the M6x50; buy two M6x60 or move that bolt. The front row sits on the rib transition — check it first.
 
 ## 5. Flow areas (geometry only, no CFD)
-- Mouth clear 186 x 55.5 R4 = **103.1 cm²** (smallest section; brief minimum 100–110, preferred 120–135).
+- Mouth clear 176 x 57.5 R4 = **101.1 cm²** (smallest section; brief minimum 100–110, preferred 120–135).
 - Throat (sleeve inside) 195 x 71 R10 = 137.6 cm². Hood cut with sleeve = 199 x 75 = 148.0 cm².
 - Verdict: above the minimum, below the preferred band. If you want 120 cm² later, raise the roof to 76 (mouth 59.5) — one parameter.
 
 ## 6. Print orientation / overhang check (faces steeper than 45° facing down, excluding the bed face)
 | part | orientation | overhang area cm² | % of surface | volume cm³ | est. g (ASA, 4 walls, ~40% infill) | bbox in print orientation |
 |---|---|---|---|---|---|---|
-| A1_flange_plate.stl | top face down (curved underside up) | 14.9 | 1.9 | 293.1 | 194 | [244.0, 181.0, 12.8] |
-| A2_cowl.stl | roof down | 38.9 | 3.8 | 163.3 | 108 | [196.0, 125.0, 66.0] |
+| A1_flange_plate.stl | top face down (curved underside up) | 15.2 | 2.0 | 293.1 | 194 | [244.0, 181.0, 12.8] |
+| A2_cowl.stl | roof down | 22.0 | 2.1 | 155.1 | 103 | [196.0, 125.0, 68.0] |
 | A2_logo_inlay.stl | roof down, as part of the cowl | 0.0 | 0.0 | 1.1 | 1 | [91.7, 33.7, 0.6] |
-| R_rain_cap.stl | flange face down, plug up | 1.4 | 0.4 | 82.2 | 55 | [196.0, 60.5, 18.0] |
+| R_rain_cap.stl | flange face down, plug up | 1.4 | 0.4 | 80.3 | 53 | [186.0, 62.5, 18.0] |
 | S_throat_sleeve.stl | standing upright (as modelled) | 0.0 | 0.0 | 31.2 | 21 | [199.0, 75.0, 29.9] |
 | C_guide_flap.stl | bracket face down, flap rising at 45° | 136.3 | 30.7 | 62.3 | 41 | [250.0, 121.0, 59.2] |
 | T_fit_check_template.stl | flat (as modelled) | 0.0 | 0.0 | 57.6 | 38 | [244.0, 181.0, 2.0] |

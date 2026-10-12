@@ -16,18 +16,18 @@
   "bodyW": 196,
   "bodyFront": 65,
   "bodyRear": 60,
-  "roofTop": 74,
+  "roofTop": 76,
   "wall": 3,
   "bodyR": 4,
   "chamferF": 4,
   "chamferR": 10,
   "rakeDeg": 20,
-  "mouthW": 186,
+  "mouthW": 176,
   "mouthR": 4,
   "lipR": 2.5,
   "bezelW": 5,
   "buildBezel": 0,
-  "bossD": 10,
+  "bossD": 8,
   "bossH": 9,
   "screwPilot": 3.4,
   "screwClear": 4.3,
@@ -49,35 +49,35 @@
   "logoW": 92
  },
  "derived": {
-  "mouthH": 55.5,
+  "mouthH": 57.5,
   "bossPos": [
    [
-    -91.0,
+    -92.5,
     -45
    ],
    [
-    91.0,
+    92.5,
     -45
    ],
    [
-    -91.0,
+    -92.5,
     45
    ],
    [
-    91.0,
+    92.5,
     45
    ],
    [
     -50,
-    53
+    54.5
    ],
    [
     50,
-    53
+    54.5
    ]
   ],
-  "roof_front_edge_y": -41.52391988982995,
-  "mouth_area_cm2": 103.09265482457437,
+  "roof_front_edge_y": -40.795979421297545,
+  "mouth_area_cm2": 101.06265482457437,
   "throat_area_cm2": 137.5915926535898,
   "hood_cut": [
    199,

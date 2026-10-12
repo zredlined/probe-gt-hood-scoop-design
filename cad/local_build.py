@@ -21,9 +21,9 @@ DEFAULTS = dict(
     cutW=195, cutL=71, cutR=10, sleeveWall=2,
     skinT=0.8, innerGap=21, innerT=0.8, gasketT=1.5,
     baseW=244, baseFront=97, baseRear=84, baseR=10, baseT=8,
-    bodyW=196, bodyFront=65, bodyRear=60, roofTop=74, wall=3, bodyR=4, chamferF=4, chamferR=10, rakeDeg=20,
-    mouthW=186, mouthR=4, lipR=2.5, bezelW=5, buildBezel=0,
-    bossD=10, bossH=9, screwPilot=3.4, screwClear=4.3, captiveNuts=0, nutAF=7.2, nutH=5.2,
+    bodyW=196, bodyFront=65, bodyRear=60, roofTop=76, wall=3, bodyR=4, chamferF=4, chamferR=10, rakeDeg=20,
+    mouthW=176, mouthR=4, lipR=2.5, bezelW=5, buildBezel=0,
+    bossD=8, bossH=9, screwPilot=3.4, screwClear=4.3, captiveNuts=0, nutAF=7.2, nutH=5.2,
     boltX=112, boltYF=80, boltYM=-4, boltYR=72, holeD=6.5, boltL=50, backingT=3,
     guideW=200, guideReach=50, guideAngle=45, cheekH=55, guideT=3,
     logoW=92,
@@ -96,7 +96,7 @@ def build(P):
 
     # ---- A1 flange plate: hood-matched underside, flat top (print top-face-down) ----
     t = np.tan(np.radians(P["rakeDeg"]))
-    bossPos = [(-(bodyW / 2 - w - 4), -45), ((bodyW / 2 - w - 4), -45), (-(bodyW / 2 - w - 4), 45), ((bodyW / 2 - w - 4), 45), (-50, yR - w - 4), (50, yR - w - 4)]
+    bossPos = [(-(bodyW / 2 - w - 2.5), -45), ((bodyW / 2 - w - 2.5), -45), (-(bodyW / 2 - w - 2.5), 45), ((bodyW / 2 - w - 2.5), 45), (-50, yR - w - 2.5), (50, yR - w - 2.5)]
     plate = ex(rrect(baseW, baseL, baseR, 0, baseCy), gTop - 12, gTop + baseT)
     sag = lambda X, Y: gTop + SAG["D"] * X**2 + SAG["E"] * X * Y + SAG["F"] * Y**2
     below = heightfield_below(np.linspace(-baseW / 2 - 15, baseW / 2 + 15, 25), np.linspace(bF - 15, bR + 15, 21), sag, gTop - 40)
@@ -118,6 +118,9 @@ def build(P):
     # ---- A2 cowl: raked mouth face, tongue, 6 screw bosses (print roof-down) ----
     z0 = gTop + baseT; mouthH = top - chF - bzW - z0
     cowl = ex(rrect(bodyW, yR - yF, bodyR, 0, (yF + yR) / 2), z0, top)
+    # six full-height screw columns, unioned BEFORE the exterior cuts so the rake and chamfers clip them: nothing shows outside
+    cols = [cyl(x, y, z0, top - 1, P["bossD"]) for x, y in bossPos]
+    cowl = U(cowl, *cols)
     yE = yF + (top - z0) * t                                     # roof front edge after the rake
     rake = wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 60, z0 - 10), (yF - 10 * t, z0 - 10), (yF + (top + 10 - z0) * t, top + 10), (yF - 60, top + 10)])
     cowl = D(cowl, rake)
@@ -131,6 +134,7 @@ def build(P):
     if chF > 0: cw.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yF - 60, top - chF - wo + (yF - 60 - yE)), (yE + chF + wo + 10, top + 10), (yF - 60, top + 10)]))
     if chR > 0: cw.append(wedge_x(-bodyW / 2 - 2, bodyW + 4, [(yR + 2, top - chR - wo - 2), (yR - chR - wo - 2, top + 2), (yR + 2, top + 2)]))
     cav = D(cav, *cw)
+    cav = D(cav, *[cyl(x, y, z0 - 3, top, P["bossD"]) for x, y in bossPos])          # the cavity cut leaves the columns standing
     mouth = rrbox_y(mouthW, mouthH, mouthR, 0, z0 + mouthH / 2, yF - 10, yF + 40)
     cuts = [cav, mouth]
     if P["buildBezel"]:
@@ -139,15 +143,14 @@ def build(P):
     # tongue (2.6 wide, 1.5 tall) into the plate groove, interrupted at the mouth
     tongue = D(ex(rrect(bodyW - 0.4, (yR - yF) - 0.4, bodyR, 0, (yF + yR) / 2), z0 - 1.5, z0 + 0.5), ex(rrect(bodyW - 5.6, (yR - yF) - 5.6, max(bodyR - 2.8, 0.5), 0, (yF + yR) / 2), z0 - 3, z0 + 1))
     tongue = D(tongue, box(-mouthW / 2, yF - 5, z0 - 3, mouthW / 2, yF + 12, z0 + 1))
-    # bosses with 45° tops, pilot bores (self-tapping M4) or captive nyloc pockets
-    bosses = []
+    # screw bores in the columns (self-tapping M4 pilot, or captive nyloc pockets)
+    bores = []
     for x, y in bossPos:
-        boss = cyl(x, y, z0, top - w + 0.5, P["bossD"])   # full-height column, roof to skirt: prints with no overhang roof-down and stiffens the roof
-        boss = D(boss, cyl(x, y, z0 - 1, z0 + P["bossH"] + 3, P["screwPilot"] if not P["captiveNuts"] else P["screwClear"] + 0.2))
+        bores.append(cyl(x, y, z0 - 1, z0 + P["bossH"] + 3, P["screwPilot"] if not P["captiveNuts"] else P["screwClear"] + 0.2))
         if P["captiveNuts"]:
-            hexp = trimesh.creation.cylinder(radius=P["nutAF"] / 2 / np.cos(np.pi / 6), height=P["nutH"] + 1, sections=6); hexp.apply_translation([x, y, z0 + (P["nutH"] + 1) / 2 - 1]); boss = D(boss, hexp)
-        bosses.append(boss)
-    cowl = U(cowl, tongue, *bosses)
+            hexp = trimesh.creation.cylinder(radius=P["nutAF"] / 2 / np.cos(np.pi / 6), height=P["nutH"] + 1, sections=6); hexp.apply_translation([x, y, z0 + (P["nutH"] + 1) / 2 - 1]); bores.append(hexp)
+    cowl = U(cowl, tongue)
+    cowl = D(cowl, *bores)
     # logo deboss on the roof (AMS: swap to purple for layers 1-3 when printing roof-down)
     xs = [x for p in LOGO_POLYS for x, _ in p]; ys = [y for p in LOGO_POLYS for _, y in p]
     sc = P["logoW"] / (max(xs) - min(xs)); cx, cy = (max(xs) + min(xs)) / 2, (max(ys) + min(ys)) / 2

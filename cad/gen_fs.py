@@ -129,20 +129,20 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
             annotation { "Name" : "Cowl width" } isLength(definition.bodyW, { (millimeter) : [150, 196, 240] } as LengthBoundSpec);
             annotation { "Name" : "Cowl front edge (-y)" } isLength(definition.bodyFront, { (millimeter) : [30, 65, 120] } as LengthBoundSpec);
             annotation { "Name" : "Cowl rear edge / tail (+y)" } isLength(definition.bodyRear, { (millimeter) : [40, 60, 140] } as LengthBoundSpec);
-            annotation { "Name" : "Cowl top height above hood" } isLength(definition.roofTop, { (millimeter) : [40, 74, 100] } as LengthBoundSpec);
+            annotation { "Name" : "Cowl top height above hood" } isLength(definition.roofTop, { (millimeter) : [40, 76, 100] } as LengthBoundSpec);
             annotation { "Name" : "Wall / roof thickness" } isLength(definition.wall, { (millimeter) : [2, 3, 5] } as LengthBoundSpec);
             annotation { "Name" : "Vertical corner radius" } isLength(definition.bodyR, { (millimeter) : [1, 4, 15] } as LengthBoundSpec);
             annotation { "Name" : "Front brow chamfer" } isLength(definition.chamferF, { (millimeter) : [0, 4, 40] } as LengthBoundSpec);
             annotation { "Name" : "Rear chamfer" } isLength(definition.chamferR, { (millimeter) : [0, 10, 40] } as LengthBoundSpec);
             annotation { "Name" : "Mouth face rake (leans back)" } isAngle(definition.rakeDeg, { (degree) : [0, 20, 40] } as AngleBoundSpec);
-            annotation { "Name" : "Mouth clear width" } isLength(definition.mouthW, { (millimeter) : [100, 186, 230] } as LengthBoundSpec);
+            annotation { "Name" : "Mouth clear width" } isLength(definition.mouthW, { (millimeter) : [100, 176, 230] } as LengthBoundSpec);
             annotation { "Name" : "Mouth corner radius" } isLength(definition.mouthR, { (millimeter) : [1, 4, 15] } as LengthBoundSpec);
             annotation { "Name" : "Mouth inner lip radius (aero)" } isLength(definition.lipR, { (millimeter) : [0, 2.5, 6] } as LengthBoundSpec);
             annotation { "Name" : "Bezel width" } isLength(definition.bezelW, { (millimeter) : [3, 5, 12] } as LengthBoundSpec);
         }
         annotation { "Group Name" : "Cowl-to-plate screws (bench joint)", "Collapsed By Default" : true }
         {
-            annotation { "Name" : "Boss diameter" } isLength(definition.bossD, { (millimeter) : [6, 10, 16] } as LengthBoundSpec);
+            annotation { "Name" : "Boss diameter" } isLength(definition.bossD, { (millimeter) : [6, 8, 16] } as LengthBoundSpec);
             annotation { "Name" : "Screw bore depth into boss" } isLength(definition.bossH, { (millimeter) : [5, 9, 20] } as LengthBoundSpec);
             annotation { "Name" : "Self-tapping pilot (M4 = 3.4)" } isLength(definition.screwPilot, { (millimeter) : [2, 3.4, 5] } as LengthBoundSpec);
             annotation { "Name" : "Clearance hole in plate (M4 = 4.3)" } isLength(definition.screwClear, { (millimeter) : [2.5, 4.3, 6.5] } as LengthBoundSpec);
@@ -192,7 +192,7 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
         // ---------------- Part A1: flange plate — hood-matched underside, flat top (print top-face-down) ----------------
         const rk = definition.rakeDeg; const tR = tan(rk);
         const bossD = definition.bossD / mm; const bossH = definition.bossH / mm; const pil = definition.screwPilot / mm; const scl = definition.screwClear / mm; const nutAF = definition.nutAF / mm; const nutH = definition.nutH / mm;
-        const bossPos = [[-(bodyW / 2 - w - 4), -45], [bodyW / 2 - w - 4, -45], [-(bodyW / 2 - w - 4), 45], [bodyW / 2 - w - 4, 45], [-50, yR - w - 4], [50, yR - w - 4]];
+        const bossPos = [[-(bodyW / 2 - w - 2.5), -45], [bodyW / 2 - w - 2.5, -45], [-(bodyW / 2 - w - 2.5), 45], [bodyW / 2 - w - 2.5, 45], [-50, yR - w - 2.5], [50, yR - w - 2.5]];
         const z0 = gTop + baseT; const mouthH = top - chF - bzW - gTop - baseT; const yE = yF + (top - z0) * tR;   // roof front edge after the rake
         if (definition.buildBase)
         {
@@ -249,6 +249,10 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
         try
         {
             var cowl = rrBox(context, id + "cowl", 0, (yF + yR) / 2, bodyW, yR - yF, z0, top, bodyR);
+            // six full-height screw columns, united BEFORE the exterior cuts so the rake and chamfers clip them (nothing shows outside)
+            var cols = [];
+            for (var i = 0; i < size(bossPos); i += 1) cols = append(cols, cylZ(context, id + ("col" ~ i), bossPos[i][0], bossPos[i][1], z0, top - 1, bossD));
+            cowl = unite(context, id + "cowlCols", concatenateArrays([[cowl], cols]));
             var wedges = [wedgeX(context, id + "rake", -bodyW / 2 - 2, bodyW + 4, [vector(yF - 60, z0 - 10), vector(yF - 10 * tR, z0 - 10), vector(yF + (top + 10 - z0) * tR, top + 10), vector(yF - 60, top + 10)])];
             if (chF > 0) wedges = append(wedges, wedgeX(context, id + "wF", -bodyW / 2 - 2, bodyW + 4, [vector(yF - 60, top - chF + (yF - 60 - yE)), vector(yE + chF + 10, top + 10), vector(yF - 60, top + 10)]));
             if (chR > 0) wedges = append(wedges, wedgeX(context, id + "wR", -bodyW / 2 - 2, bodyW + 4, [vector(yR + 2, top - chR - 2), vector(yR - chR - 2, top + 2), vector(yR + 2, top + 2)]));
@@ -258,6 +262,7 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
             var cw = [wedgeX(context, id + "crake", -bodyW / 2 - 2, bodyW + 4, [vector(yF - 60, z0 - 10), vector(yF + offR - 10 * tR, z0 - 10), vector(yF + offR + (top + 10 - z0) * tR, top + 10), vector(yF - 60, top + 10)])];
             if (chF > 0) cw = append(cw, wedgeX(context, id + "cwF", -bodyW / 2 - 2, bodyW + 4, [vector(yF - 60, top - chF - wo + (yF - 60 - yE)), vector(yE + chF + wo + 10, top + 10), vector(yF - 60, top + 10)]));
             if (chR > 0) cw = append(cw, wedgeX(context, id + "cwR", -bodyW / 2 - 2, bodyW + 4, [vector(yR + 2, top - chR - wo - 2), vector(yR - chR - wo - 2, top + 2), vector(yR + 2, top + 2)]));
+            for (var i = 0; i < size(bossPos); i += 1) cw = append(cw, cylZ(context, id + ("colKeep" ~ i), bossPos[i][0], bossPos[i][1], z0 - 3, top, bossD));   // cavity cut leaves the columns standing
             cut(context, id + "cavCh", cav, cw);
             var mouth = mkBox(context, id + "mouth", -mouthW / 2, yF - 10, z0, mouthW / 2, yF + 40, z0 + mouthH);
             filletDir(context, id + "mouthR", mouth, vector(0, 1, 0), mouthR);
@@ -274,23 +279,22 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
             var tongue = rrBox(context, id + "tng", 0, (yF + yR) / 2, bodyW - 0.4, (yR - yF) - 0.4, z0 - 1.5, z0 + 0.5, bodyR);
             cut(context, id + "tngIn", tongue, [rrBox(context, id + "tngInner", 0, (yF + yR) / 2, bodyW - 5.6, (yR - yF) - 5.6, z0 - 3, z0 + 1, max(bodyR - 2.8, 0.5)), mkBox(context, id + "tngMouth", -mouthW / 2, yF - 5, z0 - 3, mouthW / 2, yF + 12, z0 + 1)]);
             var adds = [tongue];
+            var bores = [];
             for (var i = 0; i < size(bossPos); i += 1)
             {
                 const x = bossPos[i][0]; const y = bossPos[i][1];
-                var bo = cylZ(context, id + ("boss" ~ i), x, y, z0, top - w + 0.5, bossD);          // full-height column roof→skirt: no overhang roof-down, stiffens the roof
-                var btools = [cylZ(context, id + ("bore" ~ i), x, y, z0 - 1, z0 + bossH + 3, definition.captiveNuts ? scl + 0.2 : pil)];
+                bores = append(bores, cylZ(context, id + ("bore" ~ i), x, y, z0 - 1, z0 + bossH + 3, definition.captiveNuts ? scl + 0.2 : pil));
                 if (definition.captiveNuts)
                 {
                     var hsk = newSketchOnPlane(context, id + ("hexSk" ~ i), { "sketchPlane" : plane(vector(0, 0, z0 - 1) * mm, vector(0, 0, 1), vector(1, 0, 0)) });
                     skRegularPolygon(hsk, "hex", { "center" : vector(x, y) * mm, "firstVertex" : vector(x + nutAF / 2 / cos(30 * degree), y) * mm, "sides" : 6 });
                     skSolve(hsk);
                     opExtrude(context, id + ("hexEx" ~ i), { "entities" : qSketchRegion(id + ("hexSk" ~ i)), "direction" : vector(0, 0, 1), "endBound" : BoundingType.BLIND, "endDepth" : (nutH + 1) * mm });
-                    btools = append(btools, qCreatedBy(id + ("hexEx" ~ i), EntityType.BODY));
+                    bores = append(bores, qCreatedBy(id + ("hexEx" ~ i), EntityType.BODY));
                 }
-                cut(context, id + ("bossC" ~ i), bo, btools);
-                adds = append(adds, bo);
             }
             cowl = unite(context, id + "cowlU", concatenateArrays([[cowl], adds]));
+            cut(context, id + "bores", cowl, bores);
             // debossed 4OGS wordmark on the roof (0.6 mm). AMS: swap to purple for layers 1–3 when printing roof-down.
             try
             {

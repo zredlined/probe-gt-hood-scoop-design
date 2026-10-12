@@ -8,7 +8,7 @@ Depths marked **measure** are confirmed in Round 1 of the build guide before any
 |---|---|---|---|---|---|---|
 | T  template | `stl/T_fit_check_template.stl` | PLA | flat | none | 2 / 15 % | ~40 g |
 | A1 flange plate | `stl/A1_flange_plate.stl` | ASA, black | top face down (curved side up) | none | 4 / 15 % | ~150 g |
-| A2 cowl | `stl/A2_cowl.stl` | ASA, black (+ purple for the logo, see below) | roof down | none | 4 / 30 % | ~95 g |
+| A2 cowl | `stl/A2_cowl.stl` | ASA, black (+ purple for the logo, see below) | roof down | none | 4 / 30 % | ~100 g |
 | S  throat sleeve | `stl/S_throat_sleeve.stl` | ASA, purple | standing | none | 3 / any | ~21 g |
 | R  rain cap | `stl/R_rain_cap.stl` | ASA, purple | flange down, plug up | none | 3 / 20 % | ~55 g |
 | C  guide | `stl/C_guide_flap.stl` | ASA, purple | bracket down | none (45° flap) | 4 / 30 % | ~41 g |
