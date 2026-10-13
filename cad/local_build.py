@@ -185,8 +185,9 @@ def build(P):
               *[cyl(x, y, zPlateTop - gt - 2, zPlateTop + 2, holeD) for x, y in bolts[2:4]])
     flap = box(-guideW / 2, hy - 3, zPlateTop - gt, guideW / 2, hy + reach, zPlateTop)
     Rz = trimesh.transformations.rotation_matrix(-ang, [1, 0, 0], point=[0, hy, zPlateTop - gt]); flap.apply_transform(Rz)
+    flap = D(flap, box(-guideW / 2 - 1, hy - 10, zPlateTop, guideW / 2 + 1, hy + reach + 10, zPlateTop + 10))   # trim the hinge edge flush with the bracket face so it prints flat
     zt = zPlateTop
-    cheek = wedge_x(-guideW / 2, gt, [(hy - 20, zt - gt + 0.5), (hy + reach * np.cos(ang), zt - gt + 0.5), (hy + reach * np.cos(ang), zt - gt - reach * np.sin(ang)), (hy - 20, zt - gt - cheekH)])
+    cheek = wedge_x(-guideW / 2, gt, [(hy - 20, zt), (hy + reach * np.cos(ang), zt), (hy + reach * np.cos(ang), zt - gt - reach * np.sin(ang)), (hy - 20, zt - gt - cheekH)])
     parts["C_guide_flap"] = U(plate, flap, cheek)
 
     # ---- D backing strips (metal, reference geometry) ----

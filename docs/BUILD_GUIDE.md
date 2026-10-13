@@ -49,7 +49,7 @@ That is the end of Round 1. The design will be updated with the real depths, and
 ## Round 2 — cut, make, print, fit
 
 ### Parts to have ready
-Everything in [BOM.md](BOM.md). Nothing needs supports. The plate prints top face down (the curved side ends up on top), the cowl roof down. ASA wants a closed printer door, a hot bed, and a brim on the plate. If you use the AMS, import the cowl together with `A2_logo_inlay.stl` as one object and make the inlay purple (details in the BOM).
+Everything in [BOM.md](BOM.md). Nothing needs supports. The plate prints top face down (the curved side ends up on top), the cowl roof down, the guide with its flat bracket face down (in Bambu Studio select the part, press F for Place on Face and click the big flat face with the two holes; the flap and fin then point up). ASA wants a closed printer door, a hot bed, and a brim on the plate. If you use the AMS, import the cowl together with `A2_logo_inlay.stl` as one object and make the inlay purple (details in the BOM).
 
 ![Print orientations](images/fig_print_orientation.png)
 

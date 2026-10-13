@@ -386,12 +386,13 @@ export const probeHoodScoop = defineFeature(function(context is Context, id is I
             cut(context, id + "gUcuts", plate, utools);
             var flap = mkBox(context, id + "flap", -guideW / 2, hy - 3, zPlateTop - gt, guideW / 2, hy + reach, zPlateTop);
             opTransform(context, id + "flapRot", { "bodies" : flap, "transform" : rotationAround(line(vector(0, hy, zPlateTop - gt) * mm, vector(1, 0, 0)), -ang) });
+            cut(context, id + "flapTrim", flap, [mkBox(context, id + "flapTrimBox", -guideW / 2 - 1, hy - 10, zPlateTop, guideW / 2 + 1, hy + reach + 10, zPlateTop + 10)]);   // hinge edge flush with the bracket face so it prints flat
             var parts = [plate, flap];
             if (cheekH > 0)
             {
                 const zt = zPlateTop;
                 var csk = newSketchOnPlane(context, id + "cheekSk", { "sketchPlane" : plane(vector(-guideW / 2, 0, 0) * mm, vector(-1, 0, 0), vector(0, 1, 0)) });
-                skPolyline(csk, "cheekPoly", { "points" : [vector(hy - 20, -(zt - gt + 0.5)) * mm, vector(hy + reach * cos(ang), -(zt - gt + 0.5)) * mm, vector(hy + reach * cos(ang), -(zt - gt - reach * sin(ang))) * mm, vector(hy - 20, -(zt - gt - cheekH)) * mm, vector(hy - 20, -(zt - gt + 0.5)) * mm] });
+                skPolyline(csk, "cheekPoly", { "points" : [vector(hy - 20, -zt) * mm, vector(hy + reach * cos(ang), -zt) * mm, vector(hy + reach * cos(ang), -(zt - gt - reach * sin(ang))) * mm, vector(hy - 20, -(zt - gt - cheekH)) * mm, vector(hy - 20, -zt) * mm] });
                 skSolve(csk);
                 opExtrude(context, id + "cheekEx", { "entities" : qSketchRegion(id + "cheekSk"), "direction" : vector(1, 0, 0), "endBound" : BoundingType.BLIND, "endDepth" : gt * mm });
                 parts = append(parts, qCreatedBy(id + "cheekEx", EntityType.BODY));

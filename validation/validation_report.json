@@ -10,12 +10,12 @@
  "checks": {
   "flange_fit": {
    "part": "A1_flange_plate.stl",
-   "n_samples": 12878,
+   "n_samples": 12980,
    "distance_to_scan_skin_mm": {
     "min": 0.0,
     "median": 1.59,
-    "p95": 3.56,
-    "max": 6.62
+    "p95": 3.4,
+    "max": 6.36
    },
    "design_gasket_gap_mm": 1.5
   },
@@ -24,28 +24,28 @@
     "part": "throat sleeve",
     "min_mm": 12.2,
     "at_scan_xyz": [
-     192.0,
-     -373.0,
+     201.0,
+     -372.0,
      70.0
     ],
     "at_local_xyz": [
-     83.0,
-     -37.0,
+     92.0,
+     -36.0,
      -27.0
     ]
    },
    {
     "part": "guide U-bracket + flap",
-    "min_mm": 11.6,
+    "min_mm": 11.7,
     "at_scan_xyz": [
-     214.0,
+     212.0,
      -357.0,
      68.0
     ],
     "at_local_xyz": [
-     105.0,
+     102.0,
      -22.0,
-     -31.0
+     -30.0
     ]
    },
    {
@@ -58,17 +58,17 @@
     ],
     "at_local_xyz": [
      110.0,
-     -8.0,
+     -9.0,
      -34.0
     ]
    },
    {
     "part": "backing strips",
-    "min_mm": 11.1,
+    "min_mm": 11.0,
     "at_scan_xyz": [
      209.0,
-     -384.0,
-     68.0
+     -385.0,
+     67.0
     ],
     "at_local_xyz": [
      100.0,
@@ -80,7 +80,7 @@
   "cone_placeholder": [
    {
     "part": "guide U-bracket + flap",
-    "min_gap_to_cone_placeholder_mm": 51.6
+    "min_gap_to_cone_placeholder_mm": 51.3
    },
    {
     "part": "throat sleeve",
@@ -172,14 +172,14 @@
    {
     "part": "C_guide_flap.stl",
     "orientation": "bracket face down, flap rising at 45\u00b0",
-    "overhang_area_cm2": 136.3,
-    "overhang_pct_of_surface": 30.7,
-    "volume_cm3": 62.3,
+    "overhang_area_cm2": 98.8,
+    "overhang_pct_of_surface": 22.2,
+    "volume_cm3": 62.2,
     "est_grams_ASA": 41.0,
     "bbox_mm": [
      250.0,
      121.0,
-     59.2
+     58.0
     ]
    },
    {

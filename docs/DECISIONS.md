@@ -4,6 +4,8 @@ Why the design is the way it is. Newest first. Each entry is the decision, the r
 
 ## 2026-10-11 — Rev H print fixes
 
+**Guide bracket face made truly flat.** The flap's hinge edge rose 1.2 mm through the bracket face and the inboard fin stopped 2.5 mm short of it, so the part rocked on a ridge and the slicer wanted supports under the fin. The flap is now trimmed flush with the bracket face and the fin's top edge runs at bracket-face level, so the whole underside sits on the bed. The fin is 2.5 mm taller against the hood; clearance to the strips is unchanged (0.5 mm, same as the bracket).
+
 **Screw columns clipped inside the body.** Full-height columns brace the roof and need no support, but the first version poked through the raked face and the tail chamfer. They are now united before the exterior cuts so those surfaces trim them, the mouth narrowed 186 → 176 so the front columns sit fully behind its side edges, and the roof went 74 → 76 to hold the mouth at 101 cm².
 
 **Logo inlay as a separate part.** A recessed logo cannot be coloured by layer; `A2_logo_inlay.stl` fills the recess and is assigned purple in the slicer.

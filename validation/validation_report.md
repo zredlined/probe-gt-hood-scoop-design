@@ -3,20 +3,20 @@
 Site: scan X 110, Y -340, skin Z 104.2 (label-neighbourhood estimate). All clearances come from the scan meshes; the cone is a placeholder; the hood underside registration is PROVISIONAL.
 
 ## 1. Flange underside vs outer skin (scan)
-- 12878 sampled points on the flange underside. Distance to the scanned skin: min 0.00, median 1.59, p95 3.56, max 6.62 mm. Design gasket gap is 1.5 mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.
+- 12980 sampled points on the flange underside. Distance to the scanned skin: min 0.00, median 1.59, p95 3.40, max 6.36 mm. Design gasket gap is 1.5 mm, so a median near 1.5 with p95 under ~3 means the lofted underside tracks the real hood within scan noise.
 
 ## 2. Under-hood clearance to the engine-bay scan
 | item | min clearance (mm) | where (scan XYZ) |
 |---|---|---|
-| throat sleeve | 12.2 | [192.0, -373.0, 70.0] |
-| guide U-bracket + flap | 11.6 | [214.0, -357.0, 68.0] |
+| throat sleeve | 12.2 | [201.0, -372.0, 70.0] |
+| guide U-bracket + flap | 11.7 | [212.0, -357.0, 68.0] |
 | bolt heads (head-down, under strips) | 10.6 | [219.0, -343.0, 67.0] |
-| backing strips | 11.1 | [209.0, -384.0, 68.0] |
+| backing strips | 11.0 | [209.0, -385.0, 67.0] |
 
 Anything under ~15 mm needs a physical check; the scan lacks the cone and may miss hoses/wiring. Hood closing sweep is not simulated.
 
 ## 3. Cone placeholder (D150, from scan void + photo; NOT scanned)
-- guide U-bracket + flap: min gap 51.6 mm (positive = clear)
+- guide U-bracket + flap: min gap 51.3 mm (positive = clear)
 - throat sleeve: min gap 103.6 mm (positive = clear)
 
 The brief's starting target is a 25–50 mm outlet-to-filter gap. Set the flap reach/angle after measuring the real cone.
@@ -48,7 +48,7 @@ Design value is 21 mm. The tube passes through a Ø10.5 hole in the inner panel 
 | A2_logo_inlay.stl | roof down, as part of the cowl | 0.0 | 0.0 | 1.1 | 1 | [91.7, 33.7, 0.6] |
 | R_rain_cap.stl | flange face down, plug up | 1.4 | 0.4 | 80.3 | 53 | [186.0, 62.5, 18.0] |
 | S_throat_sleeve.stl | standing upright (as modelled) | 0.0 | 0.0 | 31.2 | 21 | [199.0, 75.0, 29.9] |
-| C_guide_flap.stl | bracket face down, flap rising at 45° | 136.3 | 30.7 | 62.3 | 41 | [250.0, 121.0, 59.2] |
+| C_guide_flap.stl | bracket face down, flap rising at 45° | 98.8 | 22.2 | 62.2 | 41 | [250.0, 121.0, 58.0] |
 | T_fit_check_template.stl | flat (as modelled) | 0.0 | 0.0 | 57.6 | 38 | [244.0, 181.0, 2.0] |
 
 All parts print support-free in the listed orientation; the only faces counted sit exactly at 45°: the plate countersinks, the cowl's brow and tail chamfers, and the guide flap. All print cleanly. The cowl's screw bosses are full-height columns and add no overhang.
